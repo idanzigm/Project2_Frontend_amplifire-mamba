@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
-import { TestComponentComponent } from './test-component/test-component.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,6 @@ import { MainPageComponent } from './components/main-page/main-page.component';
   declarations: [
     AppComponent,
     TestComponent,
-    TestComponentComponent,
     LoginComponent,
     MainPageComponent
   ],
@@ -22,7 +21,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

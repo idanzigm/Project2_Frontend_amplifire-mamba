@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [{
-  path:"test",
+  path:"",
   component:TestComponent
 }
 ];

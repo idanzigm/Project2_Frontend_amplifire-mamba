@@ -10,7 +10,8 @@ import { TestComponentComponent } from './test-component/test-component.componen
   declarations: [
     AppComponent,
     TestComponent,
-    TestComponentComponent
+    TestComponentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

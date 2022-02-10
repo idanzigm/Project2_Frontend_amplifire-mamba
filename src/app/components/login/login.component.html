@@ -1,0 +1,17 @@
+<main class="form-signin">
+    <h1 class="h3 mb-3 fw-normal">Sign-In Page</h1>
+
+    <div class="input-group">
+        <label for="username">Username: </label>
+        <input id="username" placeholder="Enter Username" [(ngModel)] = loginAttempt.username>
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password: </label>
+        <input id="password" placeholder="Enter Password" [(ngModel)] = loginAttempt.password>
+    </div>
+
+    <button id="submitButton" class="w-100 btn btn-lg btn-primary" style="margin-top: 20px;" (click) = "submitInfo()">Submit</button>
+    <button class="w-100 btn btn-lg btn-primary" id="mainPageButton" style="margin-top: 20px;"><a routerLinkActive="true" routerLink="" style="color: white;">Back to Main Page</a></button> 
+</main>
+

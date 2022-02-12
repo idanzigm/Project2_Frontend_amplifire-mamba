@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { Question } from 'src/app/models/question';
 import {Category} from 'src/app/models/category';
 import { QuestionService } from 'src/app/services/question.service';
@@ -10,8 +10,10 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class TestComponent implements OnInit {
 
-  questions:Question[] = [];
+  questions:any[] = [];
   pokemon:any[] = [];
+  categoryNumber:number = 0;
+
   constructor(private quest:QuestionService) { }
 
   ngOnInit(): void {
@@ -25,5 +27,16 @@ export class TestComponent implements OnInit {
     );
   }
 
+  getCategoryQuestions(cat:number):void {
+    this.quest.getQuestionsByCategory(cat).subscribe(
+      (response:Category) => {
+        this.questions = [];
+        for (let currentQuestion of response.clues) {
+          let newQuestion = new Question(currentQuestion["id"], currentQuestion["question"], currentQuestion["answer"], currentQuestion["value"], response)
+          this.questions.push(newQuestion);
+        }
+      }
+    );
+  }
 
 }

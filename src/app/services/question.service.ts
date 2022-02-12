@@ -23,8 +23,19 @@ export class QuestionService {
   }
 
 
-  getQuestionsByCategory(cateGoryId:number): Observable<Category>{
-    return this.http.get<Category>(this.apiUrl + '/category', );
+  getQuestionsByCategory(categoryNumber:number): Observable<Category>{
+    return this.http.get<Category>(this.apiUrl + '/category?id=' + categoryNumber);
   }
 
 }
+
+/*
+return this.http
+  .post<ISubscriber[]>(
+    this.resourceUrl,
+    '[{"key": "phoneLineType", "operation": ">", "value": "200"}]',
+    {
+      params: options
+    {
+  )
+*/

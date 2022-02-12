@@ -12,10 +12,10 @@ export class CurrentUserService {
   //this service will hold data about the currently signed in user and will be able to be accessed from 
   //the necessary components
   currentUser:User;
-  url:string = "http://35.174.167.115:8080/"; //this is currently set for Bobby's EC2
+  url:string = "http://localhost:8083/"; //this is currently set for Bobby's EC2
 
   constructor(private http:HttpClient) { 
-    this.currentUser  = new User("", "", ""); //starts off as a blank user upon instantiation
+    this.currentUser  = new User(0, "", "", "", "", ""); //starts off as a blank user upon instantiation
   }
 
   getUser(loginAttempt:LoginAttempt):Observable<User>{
@@ -26,17 +26,13 @@ export class CurrentUserService {
 
   updateUser(updatedUser:User):void {
     //updates the currentUser variable stored in the CurrentUserService
-    this.currentUser.emailAddress = updatedUser.emailAddress;
-    this.currentUser.password = updatedUser.password;
-    this.currentUser.username = updatedUser.username;
+    this.currentUser = updatedUser;
   }
 
   removeUser():void {
     //this function is used when logging out. It erases cached information about the user that was previously
     //logged in
-    this.currentUser.emailAddress = "";
-    this.currentUser.password = "";
-    this.currentUser.username = "";
+    this.currentUser  = new User(0, "", "", "", "", "");
   }
 
   //TODO: Add some more functions at some point which will allow the user to change some of their information

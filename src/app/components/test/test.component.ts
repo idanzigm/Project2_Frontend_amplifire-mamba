@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Question } from 'src/app/models/question';
+import {Category} from 'src/app/models/category';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-test',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  constructor() { }
+  questions:Question[] = [];
+  pokemon:any[] = [];
+  constructor(private quest:QuestionService) { }
 
   ngOnInit(): void {
   }
+
+  getRandomQuestion():void {
+    this.quest.getQuestionsTest().subscribe(
+      (response:Question[]) => {
+        this.questions = response;
+      }
+    );
+  }
+
 
 }

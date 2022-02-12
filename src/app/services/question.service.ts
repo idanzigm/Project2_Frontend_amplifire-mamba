@@ -15,8 +15,13 @@ export class QuestionService {
   constructor(private http:HttpClient) { }
 
   getQuestions(): Observable<Question[]>{
-    return this.http.get<Question[]>(this.apiUrl);
+    return this.http.get<Question[]>(this.apiUrl + "/categories");
   }
+
+  getQuestionsTest(): Observable<Question[]>{
+    return this.http.get<Question[]>(this.apiUrl +  '/random');
+  }
+
 
   getQuestionsByCategory(cateGoryId:number): Observable<Category>{
     return this.http.get<Category>(this.apiUrl + '/category', );

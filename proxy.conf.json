@@ -1,0 +1,7 @@
+{
+    "/api": {
+      "target": "https://jservice.io/api",
+      "secure": true,
+      "changeOrigin": true
+    }
+}

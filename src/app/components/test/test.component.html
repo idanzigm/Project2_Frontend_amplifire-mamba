@@ -1,7 +1,13 @@
 <button (click)="gMPC()" class="btn btn-secondary">Find most populous categories</button>
 <br>
 <small>*note - it takes roughly 10 seconds to poll the entire jService api so be patient! </small><br>
-<small>to see more categories change the "maxQuestionsLimit" variable in the .TS page </small>
+<small>To see more categories change the "maxQuestionsLimit" variable in the .TS page </small>
+<br>
+<br>
+<button (click)="sendCategories()" class="btn btn-secondary">Send Categories to Database</button>
+<br>
+<small>*note - only click this when all categories have been loaded using the above button. </small><br>
+<small>The table at the bottom of the page will be persisted in the database </small>
 <br>
 <br>
 <button (click)="getRandomQuestion()" class="btn btn-secondary">Get a random Question</button>

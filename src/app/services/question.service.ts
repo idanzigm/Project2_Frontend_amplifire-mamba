@@ -39,6 +39,10 @@ export class QuestionService {
     return cats; //return a promise of the categories?
   }
 
+  sendMostCategories(cats:AbridgedCategory[]): Observable<number> {
+    return this.http.post(this.backendUrl +  '/mpcategories', cats) as Observable<number>;
+  }
+
 }
 
 /*

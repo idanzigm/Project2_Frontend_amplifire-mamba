@@ -16,7 +16,7 @@ export class TestComponent implements OnInit {
   mostQuestions:AbridgedCategory[] = [];
   categoryNumber:number = 0;
   continue:boolean = true;
-  maxQuestionsLimit:number = 50; //dictates the maximum size of the 'mostQuestions' array
+  maxQuestionsLimit:number = 75; //dictates the maximum size of the 'mostQuestions' array
   paginationAmount:number = 100; //100 is the maximum for pagination
 
   constructor(private quest:QuestionService) { }
@@ -95,6 +95,25 @@ export class TestComponent implements OnInit {
       }
     }
 
+  }
+
+  sendCategories():void {
+    //once the list of most populated categories has been filled out, send them to the database for easy reference in the future.
+    //NOTE - there shouldn't really be a need to do this multiple times.
+
+    //TODO: implement a function to delete current categories from database so that the list can potentially be refreshed
+
+    if (this.mostQuestions.length == 0) {
+      alert("There aren't any categories to send.")
+    }
+    else {
+      this.quest.sendMostCategories(this.mostQuestions).subscribe(
+        (response:number) => {
+          if (response == 0) console.log("Successfully added categories!")
+          else console.log("Something went wrong.")
+        }
+      )
+    }
   }
 
 }

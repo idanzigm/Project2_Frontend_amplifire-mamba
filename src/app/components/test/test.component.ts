@@ -53,22 +53,20 @@ export class TestComponent implements OnInit {
     for (let currentCategory of response) {
       let currentAmount:number = currentCategory.clues_count;
 
+      //before going into the below loop, check to see if the 'mostQuestions' array is at capacity yet.
+      //if it is, check the last element to see if the current one is bigger. if not then skip
+      if (this.mostQuestions.length == this.maxQuestionsLimit) {
+        if (currentAmount <= this.mostQuestions[this.maxQuestionsLimit - 1].clues_count) continue;
+      }
+
       //this is where we put our sorting logic
       for (let i:number = this.mostQuestions.length; i >= 0; i--) {
         //we start at the end of the array and iterate towards the beginning
         if (i == 0) {
           //we've reached the front of the array so add the element to the front
-          if (this.mostQuestions.length == 0) {
-            this.mostQuestions.push(currentCategory); //if the array is empty then we just add the result
-            break; //break out of the loop
-          }
-          else if (currentAmount > this.mostQuestions[0].clues_count) {
-            this.mostQuestions.splice(0, 0, currentCategory); //insert the current category to the front of the array
-            break; //break out of the loop
-          }
+          this.mostQuestions.splice(0, 0, currentCategory); //insert the current category to the front of the array
         }
-
-        if (currentAmount <= this.mostQuestions[i - 1].clues_count) {
+        else if (currentAmount <= this.mostQuestions[i - 1].clues_count) {
           //insert right before the current location of the array and break
           this.mostQuestions.splice(i, 0, currentCategory); //insert the current category to the front of the array
           break; //since we already inserted element no need to keep iterating through the array

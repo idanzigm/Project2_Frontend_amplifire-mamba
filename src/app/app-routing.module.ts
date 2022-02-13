@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TestComponent } from './components/test/test.component';
+import { GameModeComponent } from './components/game-mode/game-mode.component';
 
 const routes: Routes = [{
   path:"",
@@ -17,6 +18,9 @@ const routes: Routes = [{
 }, {
   path:"test",
   component:TestComponent
+}, {
+  path:"game-mode",
+  component:GameModeComponent
 }
 ];
 

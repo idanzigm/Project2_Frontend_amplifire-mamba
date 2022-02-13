@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterComponent } from './components/register/register.component';
+import { GameModeComponent } from './components/game-mode/game-mode.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RegisterComponent } from './components/register/register.component';
     TestComponent,
     RegisterComponent,
     LoginComponent,
-    MainPageComponent
+    MainPageComponent,
+    GameModeComponent
   ],
   imports: [
     BrowserModule,

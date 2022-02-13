@@ -1,11 +1,17 @@
+<button (click)="gMPC()" class="btn btn-secondary">Find most populous categories</button>
+<br>
+<small>*note - it takes roughly 20 seconds to poll the entire jService api so be patient! </small><br>
+<small>to see more categories change the "maxQuestionsLimit" variable in the .TS page </small>
+<br>
+<br>
 <button (click)="getRandomQuestion()" class="btn btn-secondary">Get a random Question</button>
 <br>
 <br>
 <button (click)="getCategoryQuestions(categoryNumber)" class="btn btn-secondary" style="margin-right: 15px;">Get all Questions from Category</button>
 <input type="text" placeholder="Enter a Category Number" [(ngModel)]="categoryNumber">
-<p>Here's the question(s) you wanted:</p>
 <br>
 <br>
+<h4>Question Query Table:</h4>
 <table class = "table">
     <thead>
         <tr>
@@ -23,6 +29,25 @@
             <td>{{q.answer}}</td>
             <td>{{q.value}}</td>
             <td>{{q.category.title}}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<h4>Here's a list of the top {{maxQuestionsLimit}} categories with the most questions</h4>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Category Questions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let mq of mostQuestions">
+            <td>{{mq.id}}</td>
+            <td>{{mq.title}}</td>
+            <td>{{mq.clues_count}}</td>
         </tr>
     </tbody>
 </table>

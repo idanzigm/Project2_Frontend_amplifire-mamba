@@ -43,6 +43,10 @@ export class QuestionService {
     return this.http.post(this.backendUrl +  '/mpcategories', cats) as Observable<number>;
   }
 
+  getMostCategories(): Observable<AbridgedCategory[]> {
+    return this.http.get(this.backendUrl + '/mpcategories') as Observable<AbridgedCategory[]>;
+  }
+
 }
 
 /*

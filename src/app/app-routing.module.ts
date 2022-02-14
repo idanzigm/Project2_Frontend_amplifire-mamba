@@ -5,6 +5,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TestComponent } from './components/test/test.component';
 import { GameModeComponent } from './components/game-mode/game-mode.component';
+import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 
 const routes: Routes = [{
   path:"",
@@ -21,6 +22,9 @@ const routes: Routes = [{
 }, {
   path:"game-mode",
   component:GameModeComponent
+}, {
+  path:"practice-mode",
+  component:PracticeModeComponent
 }
 ];
 

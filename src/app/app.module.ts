@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { GameModeComponent } from './components/game-mode/game-mode.component';
+import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GameModeComponent } from './components/game-mode/game-mode.component';
     RegisterComponent,
     LoginComponent,
     MainPageComponent,
-    GameModeComponent
+    GameModeComponent,
+    PracticeModeComponent
   ],
   imports: [
     BrowserModule,

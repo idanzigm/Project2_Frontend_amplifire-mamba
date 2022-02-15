@@ -7,12 +7,14 @@ export class Question {
     public answer:string;
     public value:number;
     public category:Category;
+    public airdate:string;
 
-    constructor(questionId:number, clue:string, answer:string, value:number, category:Category){
+    constructor(questionId:number, clue:string, answer:string, value:number, category:Category, airdate:string){
         this.id = questionId;
         this.question = clue;
         this.answer = answer;
         this.value = value;
         this.category = category;
+        this.airdate = airdate;
     }
 }

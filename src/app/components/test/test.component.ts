@@ -38,7 +38,7 @@ export class TestComponent implements OnInit {
       (response:Category) => {
         this.questions = [];
         for (let currentQuestion of response.clues) {
-          let newQuestion = new Question(currentQuestion["id"], currentQuestion["question"], currentQuestion["answer"], currentQuestion["value"], response)
+          let newQuestion = new Question(currentQuestion["id"], currentQuestion["question"], currentQuestion["answer"], currentQuestion["value"], response, currentQuestion["airdate"]);
           this.questions.push(newQuestion);
           this.continue = true;
         }

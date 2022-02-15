@@ -10,22 +10,22 @@ import { Question } from '../models/question';
 })
 export class QuestionService {
 
-  apiUrl:string = 'https://jservice.io/api';
-  backendUrl:string = 'http://localhost:8083';
+  apiUrl:string = 'https://jservice.io/api/';
+  backendUrl:string = 'http://localhost:8083/';
 
   constructor(private http:HttpClient) { }
 
   getQuestions(): Observable<Question[]>{
-    return this.http.get<Question[]>(this.apiUrl + "/categories");
+    return this.http.get<Question[]>(this.apiUrl + "categories");
   }
 
   getQuestionsTest(): Observable<Question[]>{
-    return this.http.get<Question[]>(this.apiUrl +  '/random');
+    return this.http.get<Question[]>(this.apiUrl +  'random?count=10');
   }
 
 
   getQuestionsByCategory(categoryNumber:number): Observable<Category>{
-    return this.http.get<Category>(this.apiUrl + '/category?id=' + categoryNumber);
+    return this.http.get<Category>(this.apiUrl + 'category?id=' + categoryNumber);
   }
 
   getCategoriesTest(offset:number, count:number): Observable<AbridgedCategory[]> {
@@ -40,11 +40,17 @@ export class QuestionService {
   }
 
   sendMostCategories(cats:AbridgedCategory[]): Observable<number> {
-    return this.http.post(this.backendUrl +  '/mpcategories', cats) as Observable<number>;
+    return this.http.post(this.backendUrl +  'mpcategories', cats) as Observable<number>;
   }
 
   getMostCategories(): Observable<AbridgedCategory[]> {
-    return this.http.get(this.backendUrl + '/mpcategories') as Observable<AbridgedCategory[]>;
+    return this.http.get(this.backendUrl + 'mpcategories') as Observable<AbridgedCategory[]>;
+  }
+
+  //Review this method tomorrow
+  //I also don't want to mess with the backend without the groups ok
+  getCategoryId(title:string): Observable<number>{
+    return this.http.get(this.backendUrl + "" + title) as Observable<number>;
   }
 
 }

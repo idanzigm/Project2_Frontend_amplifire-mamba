@@ -100,6 +100,7 @@ export class PracticeModeComponent implements OnInit {
           }
 
           //after going through each question, add the individual question arrays to the currentCategoryQuestions array
+          this.currentCategoryQuestions = []; //before adding new questions, make sure to remove any existing questions
           this.currentCategoryQuestions.push(easiestQuestions);
           this.currentCategoryQuestions.push(easyQuestions);
           this.currentCategoryQuestions.push(mediumQuestions);
@@ -113,7 +114,6 @@ export class PracticeModeComponent implements OnInit {
         }
       )
     }
-
   }
 
   findCategoryInArray(categoryName:string):number {

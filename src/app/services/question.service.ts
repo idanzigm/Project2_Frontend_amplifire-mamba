@@ -15,15 +15,12 @@ export class QuestionService {
 
   constructor(private http:HttpClient) { }
 
-  getQuestions(): Observable<Question[]>{
-    return this.http.get<Question[]>(this.apiUrl + "categories");
-  }
-
   getQuestionsTest(): Observable<Question[]>{
     return this.http.get<Question[]>(this.apiUrl +  'random?count=10');
   }
 
 
+  /*
   getQuestionsByCategory(categoryNumber:number): Observable<Category>{
     return this.http.get<Category>(this.apiUrl + 'category?id=' + categoryNumber);
   }
@@ -46,13 +43,7 @@ export class QuestionService {
   getMostCategories(): Observable<AbridgedCategory[]> {
     return this.http.get(this.backendUrl + 'mpcategories') as Observable<AbridgedCategory[]>;
   }
-
-  //Review this method tomorrow
-  //I also don't want to mess with the backend without the groups ok
-  getCategoryId(title:string): Observable<number>{
-    return this.http.get(this.backendUrl + "" + title) as Observable<number>;
-  }
-
+*/
 }
 
 /*

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       next:(data:User)=>{
         //If the user exists then we get a 200 response and update the current user in the currentUserService
         this.currentUserService.updateUser(data); //the current user is now logged in and we store their information for potential later use
+        console.log(this.currentUserService.currentUser);
       },
       error:()=>{
         console.log("Something went wrong when attempting to log in.")

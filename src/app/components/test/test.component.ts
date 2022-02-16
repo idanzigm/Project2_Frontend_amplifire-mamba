@@ -14,7 +14,7 @@ export class TestComponent implements OnInit {
 
   questions:any[] = [];
   mostQuestions:AbridgedCategory[] = [];
-  categoryNumber:number = 0;
+  categoryNumber:number = 25;
   continue:boolean = true;
   maxQuestionsLimit:number = 75; //dictates the maximum size of the 'mostQuestions' array
   paginationAmount:number = 100; //100 is the maximum for pagination

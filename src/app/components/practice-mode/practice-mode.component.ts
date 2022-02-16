@@ -24,6 +24,7 @@ export class PracticeModeComponent implements OnInit {
   ngOnInit(): void {
     this.questionService.getMostCategories().subscribe(
       (response:AbridgedCategory[])=> {
+        console.log(response);
         this.categories = response;
       }
     )

@@ -12,6 +12,7 @@ export class CategoryService {
 
   apiUrl:string = 'https://jservice.io/api/';
   backendUrl:string = 'http://localhost:8083/';
+  //backendUrl:string = 'http://35.174.167.115:7000/';
 
   constructor(private http:HttpClient) { }
 

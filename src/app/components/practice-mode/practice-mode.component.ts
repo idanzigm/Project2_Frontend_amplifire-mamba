@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
@@ -31,7 +31,16 @@ export class PracticeModeComponent implements OnInit {
         this.catArray.forEach(element => 
           this.categories.set(element.title, element.id)
         );
-        console.log(this.categories);
+        
+        //after the categories have been loaded, select a random one to display
+        // let randomNumber:number = Math.floor(Math.random() * this.catArray.length);
+        // let selectedCategory = document.getElementById("categoryList")?.getElementsByTagName("option")[randomNumber];
+
+        // if (selectedCategory != undefined) {
+        //   selectedCategory.selected = true;
+        //   console.log(selectedCategory.value);
+        // }
+        // console.log("yeeet");
       }
     )
   }

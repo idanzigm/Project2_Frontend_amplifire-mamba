@@ -18,6 +18,6 @@
 
   <a mat-raised-button color="accent" routerLinkActive="true" routerLink="register" *ngIf= "!userLoggedIn()">Sign Up</a>
 
-  <button  class="btn btn-danger navbar-btn" *ngIf= "userLoggedIn()">Logout</button>
+  <button  class="btn btn-danger navbar-btn" *ngIf= "userLoggedIn()" (click) = "logout()">Logout</button>
 
 </mat-toolbar>

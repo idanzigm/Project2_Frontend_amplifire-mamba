@@ -17,7 +17,20 @@ export class CurrentUserService {
 
   constructor(private http:HttpClient) { 
     this.currentUser  = new User(0, "", "", "", "", "", []); //starts off as a blank user upon instantiation
-    console.log("Current user service constructor called");
+    
+    //TODO: Remove when done with testing
+    this.loginForTesting();
+  }
+
+  loginForTesting() {
+    //because of Angular's hot reloading, everytime I make a change the page reloads which will log out the
+    //current user. This is getting annoying during testing so I'm writing this function to just automatically
+    //log in a user upon initial application load
+    this.getUser(new LoginAttempt("Capn01", "hello")).subscribe(
+      (response:User) => {
+        this.updateUser(response);
+      }
+    )
   }
 
   getUser(loginAttempt:LoginAttempt):Observable<User>{

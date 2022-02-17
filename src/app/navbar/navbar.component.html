@@ -12,12 +12,12 @@
 
   <a mat-button routerLinkActive="true" routerLink="update-user" *ngIf= "userLoggedIn()" ><mat-icon>update</mat-icon>Update-User</a>
 
-  <a mat-button routerLinkActive="true" routerLink="statistics" *ngIf= "userLoggedIn()" >User Stats</a>
+  <a mat-button routerLinkActive="true" routerLink="statistics" *ngIf= "userLoggedIn()" >Stats</a>
 
   <a mat-button routerLinkActive="true" routerLink="login" *ngIf= "!userLoggedIn()" ><mat-icon>login</mat-icon>Login</a>
 
   <a mat-raised-button color="accent" routerLinkActive="true" routerLink="register" *ngIf= "!userLoggedIn()">Sign Up</a>
 
-  <button style="position:absolute; right: 0; margin-right: 15px;" class="btn btn-danger navbar-btn" *ngIf= "userLoggedIn()">Logout</button>
+  <button  class="btn btn-danger navbar-btn" *ngIf= "userLoggedIn()">Logout</button>
 
 </mat-toolbar>

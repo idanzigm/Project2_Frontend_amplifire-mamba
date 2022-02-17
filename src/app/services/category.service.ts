@@ -12,6 +12,7 @@ export class CategoryService {
 
   apiUrl:string = 'https://jservice.io/api/';
   backendUrl:string = 'http://localhost:8083/';
+  currentCategoryQuestions:Array<Question[]> = [];
   //backendUrl:string = 'http://35.174.167.115:7000/';
 
   constructor(private http:HttpClient) { }
@@ -39,10 +40,10 @@ export class CategoryService {
     return this.http.get(this.backendUrl + 'mpcategories') as Observable<Map<string, number>>;
   }
 
-  loadCategoryQuestions(id:number):Array<Question[]> {
-    let currentCategoryQuestions:Array<Question[]> = [];
+  loadCategoryQuestions(id:number):void {
       this.getQuestionsByCategory(id).subscribe(
         (response:Category) => {
+          //console.log(response);
           //get all of the clues from the category and sory into separate arrays based on difficulty
           let allQuestions:Question[] = response.clues;
 
@@ -88,14 +89,14 @@ export class CategoryService {
           }
 
           //after going through each question, add the individual question arrays to the currentCategoryQuestions array
-          currentCategoryQuestions = []; //before adding new questions, make sure to remove any existing questions
-          currentCategoryQuestions.push(easiestQuestions);
-          currentCategoryQuestions.push(easyQuestions);
-          currentCategoryQuestions.push(mediumQuestions);
-          currentCategoryQuestions.push(hardQuestions);
-          currentCategoryQuestions.push(hardestQuestions);
+          this.currentCategoryQuestions = []; //before adding new questions, make sure to remove any existing questions
+          this.currentCategoryQuestions.push(easiestQuestions);
+          this.currentCategoryQuestions.push(easyQuestions);
+          this.currentCategoryQuestions.push(mediumQuestions);
+          this.currentCategoryQuestions.push(hardQuestions);
+          this.currentCategoryQuestions.push(hardestQuestions);
         }
       )
-      return currentCategoryQuestions;
+      
   }
 }

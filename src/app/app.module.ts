@@ -14,6 +14,7 @@ import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     GameModeComponent,
     PracticeModeComponent,
     NavbarComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

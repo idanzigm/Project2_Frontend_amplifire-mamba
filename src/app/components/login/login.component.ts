@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginAttempt } from 'src/app/models/login-attempt';
 import { User } from 'src/app/models/user';
 import { CurrentUserService } from 'src/app/services/current-user.service';
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginAttempt:LoginAttempt;
 
-  constructor(private currentUserService:CurrentUserService) {
+  constructor(private currentUserService:CurrentUserService, private router:Router) {
     this.loginAttempt = new LoginAttempt("", ""); //start with a blank login attempt
   }
 
@@ -26,9 +27,10 @@ export class LoginComponent implements OnInit {
       next:(data:User)=>{
         //If the user exists then we get a 200 response and update the current user in the currentUserService
         this.currentUserService.updateUser(data); //the current user is now logged in and we store their information for potential later use
+        //console.log(this.currentUserService.currentUser.userStats);
         
         //redirect to the main page
-        location.href = 'http://localhost:4200'; //TODO: can this be done with router module instead?
+        this.router.navigateByUrl("");
       },
       error:()=>{
         console.log("Something went wrong when attempting to log in.")

@@ -17,6 +17,7 @@ export class CurrentUserService {
 
   constructor(private http:HttpClient) { 
     this.currentUser  = new User(0, "", "", "", "", "", []); //starts off as a blank user upon instantiation
+    console.log("Current user service constructor called");
   }
 
   getUser(loginAttempt:LoginAttempt):Observable<User>{
@@ -38,6 +39,37 @@ export class CurrentUserService {
 
   createUser(user:User):Observable<User> {
     return this.http.post(this.url + "users", user) as Observable<User>;
+  }
+
+  updateStat(statCategory:string, difficulty:number, correct:boolean):void {
+    for (let stat of this.currentUser.userStats) {
+      if (stat.categoryName == statCategory) {
+        console.log("found a category match");
+        console.log("difficulty passed to the updateStat function is: " + difficulty);
+          if (difficulty == 0) {
+            stat.easiestAttempted += 1;
+            if (correct) stat.easiestCorrect += 1;
+          }
+          else if (difficulty == 1) {
+            stat.easyAttempted += 1;
+            if (correct) stat.easyCorrect += 1;
+          }
+          else if (difficulty == 2) {
+            stat.mediumAttempted += 1;
+            if (correct) stat.mediumCorrect += 1;
+          }
+          else if (difficulty == 3) {
+            stat.hardAttempted += 1;
+            if (correct) stat.hardCorrect += 1;
+          }
+          else {
+            stat.hardestAttempted += 1;
+            if (correct) stat.hardestCorrect += 1;
+          }
+
+        break; //only one of each category so we can break out of loop after updating it
+      }
+    }
   }
 
   //TODO: Add some more functions at some point which will allow the user to change some of their information

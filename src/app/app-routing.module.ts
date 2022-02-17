@@ -7,6 +7,7 @@ import { TestComponent } from './components/test/test.component';
 import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 const routes: Routes = [{
   path:"",
@@ -29,6 +30,9 @@ const routes: Routes = [{
 },{
   path:"update-user",
   component:UpdateUserComponent
+},{
+  path:"statistics",
+  component:StatisticsComponent
 }
 ];
 

@@ -1,0 +1,13 @@
+.spacer{
+    flex: 1 1 auto;
+}
+
+a:hover {
+    background-color:blue;
+    color:white;
+  }
+
+a{
+    margin-left: 5px;
+    margin-right: 5px;
+}

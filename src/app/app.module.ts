@@ -14,6 +14,10 @@ import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

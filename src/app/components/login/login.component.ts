@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
         this.currentUserService.updateUser(data); //the current user is now logged in and we store their information for potential later use
         //console.log(this.currentUserService.currentUser.userStats);
         
+        //need to update user on navbar. since navbar is always showing the OnInit() function only gets called once
+        
+
         //redirect to the main page
         this.router.navigateByUrl("");
       },

@@ -41,6 +41,11 @@ export class CurrentUserService {
     return this.http.post(this.url + "users", user) as Observable<User>;
   }
 
+  giveCurrentUser():User {
+    //this functino is used to pass info on the current user to the components that use this service
+    return this.currentUser;
+  }
+
   updateStat(statCategory:string, difficulty:number, correct:boolean):void {
     for (let stat of this.currentUser.userStats) {
       if (stat.categoryName == statCategory) {

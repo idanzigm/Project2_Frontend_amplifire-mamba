@@ -14,32 +14,31 @@ import { QuestionService } from 'src/app/services/question.service';
 export class PracticeModeComponent implements OnInit {
 
   categories:Map<string, number> = new Map<string, number>();
+  catArray:AbridgedCategory[] = [];
   currentCategoryName:string = "";
   displayCategory:string = "";
   currentDifficulty:number= 0;
   currentQuestion:Question = new Question(0, "", "", 0, new Category(0, "", 0, []), "");
   userAnswer:string = "";
-  //currentCategoryQuestions:Array<Question[]> = [];
+  currentCategoryQuestions:Array<Question[]> = [];
 
   constructor(private questionService:QuestionService, private categoryService:CategoryService, private currentUserService:CurrentUserService) { }
 
   ngOnInit(): void {
     this.categoryService.getMostCategories().subscribe(
-      (response:any)=> {
-        for (let yo of response) {
-          //console.log(yo);
-          let abridged:AbridgedCategory = yo;
-          this.categories.set(abridged.title, abridged.id);
-        }
-
-        //this.categories = response;
-        //console.log(this.categories);
+      (response:AbridgedCategory[])=> {
+        this.catArray = response;
+        this.catArray.forEach(element => 
+          this.categories.set(element.title, element.id)
+        );
+        console.log(this.categories);
       }
     )
   }
 
   difficultyChange():void {
     //when the difficulty changes reset the question that's currently displaying
+    this.loadCategoryQuestions();
     this.getCategoryQuestion();
     this.userAnswer = "";
   }
@@ -51,13 +50,17 @@ export class PracticeModeComponent implements OnInit {
     this.userAnswer = "";
 
     if (this.currentCategoryName != this.displayCategory) {
-      //Update the current category questions in the category service
-      this.categoryService.loadCategoryQuestions(this.findCategoryInArray(this.currentCategoryName));
+      this.categoryService.getQuestionsByCategory(this.findCategoryInArray(this.currentCategoryName)).subscribe(
+        (response:Category) => {
+          let cat:Category = response;
+          let catQuestions:Question[] = cat.clues;
+          this.currentCategoryQuestions = this.categoryService.sortByDifficulty(catQuestions);
+          this.displayCategory = this.currentCategoryName;
+          //After loading a new category, display a question in the text box
+          this.getCategoryQuestion();
+        }
+      );
     }
-
-    this.displayCategory = this.currentCategoryName;
-    //After loading a new category, display a question in the text box
-    this.getCategoryQuestion();
   }
 
   findCategoryInArray(categoryName:string):number {
@@ -83,30 +86,25 @@ export class PracticeModeComponent implements OnInit {
 
     //TODO: Currently all questions are viewable, if we want to limit the questions that can actually get asked during the practice game this would be the
     //place to do it
-    
-    let randomNumber:number = Math.floor(Math.random() * this.categoryService.currentCategoryQuestions[this.currentDifficulty].length)
-    this.currentQuestion = this.categoryService.currentCategoryQuestions[this.currentDifficulty][randomNumber];
+
+    console.log("Values in currentCategoryQuestions: " + this.currentCategoryQuestions);
+    let randomNumber:number = Math.floor(Math.random() * this.currentCategoryQuestions[this.currentDifficulty].length)
+    this.currentQuestion = this.currentCategoryQuestions[this.currentDifficulty][randomNumber];
     this.userAnswer = ""; //reset whatever answer is currently in the input box
   }
 
   checkAnswer():void {
+    let correct:boolean = false;
     if (this.userAnswer == this.currentQuestion.answer) {
       alert("Correct, good job!");
-      //update statistics for user on correct answer
-      //TODO: This functionality should only be in main game mode, but I'm putting it here now to test
-      console.log("current display category is: " + this.displayCategory);
-      console.log("Current difficulty is: " + this.currentDifficulty);
-      this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, true);
+      correct = true;
     }
     else {
       alert("Sorry incorrect, please try again.");
-      //update statistics for user on incorrect answer
-      //TODO: This functionality should only be in main game mode, but I'm putting it here now to test
-      console.log("current display category is: " + this.displayCategory);
-      console.log("Current difficulty is: " + this.currentDifficulty);
-      this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, false);
-      console.log("returned");
     }
+    //update statistics for user on incorrect answer
+    //TODO: This functionality should only be in main game mode, but I'm putting it here now to test
+    this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, correct);
   }
 
   revealAnswer():void {

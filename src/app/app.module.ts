@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PromptComponent } from './components/prompt/prompt.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MainPageComponent,
     GameModeComponent,
     PracticeModeComponent,
-    NavbarComponent
+    NavbarComponent,
+    PromptComponent
   ],
   imports: [
     BrowserModule,

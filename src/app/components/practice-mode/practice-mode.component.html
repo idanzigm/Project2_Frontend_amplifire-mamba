@@ -2,7 +2,7 @@
     <div id="drop-down-menus" style="display:inline-block">
         <label for="category">Select a Category: </label>
         <select name="category" id="category" style="margin-right:15px; margin-left:10px;" [(ngModel)]="currentCategoryName" (change)="loadCategoryQuestions()">
-            <option *ngFor="let cat of categories.keys()" value="{{cat}}">{{cat}}</option>
+            <option *ngFor="let cat of catArray" value="{{cat.title}}">{{cat.title}}</option>
         </select>
 
         <label for="difficulty">Select a Difficulty: </label>

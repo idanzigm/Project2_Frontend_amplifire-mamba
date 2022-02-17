@@ -10,7 +10,7 @@
 
   <a mat-button routerLinkActive="true" routerLink="practice-mode" *ngIf= this.currentUser >Practice-Mode</a>
 
-  <a mat-button routerLinkActive="true" routerLink="update-user" *ngIf= this.currentUser >Update-User</a>
+  <a mat-button routerLinkActive="true" routerLink="update-user" *ngIf= this.currentUser ><mat-icon>update</mat-icon>Update-User</a>
 
   <a mat-button routerLinkActive="true" routerLink="login" *ngIf= !this.currentUser ><mat-icon>login</mat-icon>Login</a>
 
@@ -19,20 +19,3 @@
   <button style="position:absolute; right: 0; margin-right: 15px;" class="btn btn-danger navbar-btn" *ngIf= this.currentUser>Logout</button>
 
 </mat-toolbar>
-<script>console.log(this.currentUser)</script>
-
-
-<!-- <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48OCnIOFMVAlHvM45_tZA2XxJxE0ncNT3Cg&usqp=CAU" height="40px" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <button style="position:absolute; right: 0; margin-right: 15px;" class="btn btn-danger navbar-btn">Logout</button>
-          
-        </ul>
-      </div>
-    </div>
-  </nav> -->

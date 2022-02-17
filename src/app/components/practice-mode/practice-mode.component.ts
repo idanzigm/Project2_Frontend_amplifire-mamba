@@ -13,6 +13,7 @@ import { QuestionService } from 'src/app/services/question.service';
 export class PracticeModeComponent implements OnInit {
 
   categories:Map<string, number> = new Map<string, number>();
+  catArray:AbridgedCategory[] = [];
   currentCategoryName:string = "";
   displayCategory:string = "";
   currentDifficulty:number= 0;
@@ -24,14 +25,19 @@ export class PracticeModeComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getMostCategories().subscribe(
-      (response:Map<string, number>)=> {
-        this.categories = response;
+      (response:AbridgedCategory[])=> {
+        this.catArray = response;
+        this.catArray.forEach(element => 
+          this.categories.set(element.title, element.id)
+        );
+        console.log(this.categories);
       }
     )
   }
 
   difficultyChange():void {
     //when the difficulty changes reset the question that's currently displaying
+    this.loadCategoryQuestions();
     this.getCategoryQuestion();
     this.userAnswer = "";
   }
@@ -43,13 +49,17 @@ export class PracticeModeComponent implements OnInit {
     this.userAnswer = "";
 
     if (this.currentCategoryName != this.displayCategory) {
-      //Find out if I should be using currentCategoryName or displayCategory
-      this.currentCategoryQuestions = this.categoryService.loadCategoryQuestions(this.findCategoryInArray(this.currentCategoryName));
+      this.categoryService.getQuestionsByCategory(this.findCategoryInArray(this.currentCategoryName)).subscribe(
+        (response:Category) => {
+          let cat:Category = response;
+          let catQuestions:Question[] = cat.clues;
+          this.currentCategoryQuestions = this.categoryService.sortByDifficulty(catQuestions);
+          this.displayCategory = this.currentCategoryName;
+          //After loading a new category, display a question in the text box
+          this.getCategoryQuestion();
+        }
+      );
     }
-
-    this.displayCategory = this.currentCategoryName;
-    //After loading a new category, display a question in the text box
-    this.getCategoryQuestion();
   }
 
   findCategoryInArray(categoryName:string):number {
@@ -75,6 +85,7 @@ export class PracticeModeComponent implements OnInit {
 
     //TODO: Currently all questions are viewable, if we want to limit the questions that can actually get asked during the practice game this would be the
     //place to do it
+    console.log("Values in currentCategoryQuestions: " + this.currentCategoryQuestions);
     let randomNumber:number = Math.floor(Math.random() * this.currentCategoryQuestions[this.currentDifficulty].length)
     this.currentQuestion = this.currentCategoryQuestions[this.currentDifficulty][randomNumber];
     this.userAnswer = ""; //reset whatever answer is currently in the input box

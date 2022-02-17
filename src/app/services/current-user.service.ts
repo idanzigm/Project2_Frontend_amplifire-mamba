@@ -13,9 +13,10 @@ export class CurrentUserService {
   //the necessary components
   currentUser:User;
   url:string = "http://localhost:8083/";
+  //url:string = 'http://35.174.167.115:7000/';
 
   constructor(private http:HttpClient) { 
-    this.currentUser  = new User(0, "", "", "", "", ""); //starts off as a blank user upon instantiation
+    this.currentUser  = new User(0, "", "", "", "", "", []); //starts off as a blank user upon instantiation
   }
 
   getUser(loginAttempt:LoginAttempt):Observable<User>{
@@ -32,7 +33,7 @@ export class CurrentUserService {
   removeUser():void {
     //this function is used when logging out. It erases cached information about the user that was previously
     //logged in
-    this.currentUser  = new User(0, "", "", "", "", "");
+    this.currentUser  = new User(0, "", "", "", "", "", []);
   }
 
   createUser(user:User):Observable<User> {

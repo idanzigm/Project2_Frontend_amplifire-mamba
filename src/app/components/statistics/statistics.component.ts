@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Stat } from 'src/app/models/stat';
 import { User } from 'src/app/models/user';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
@@ -15,6 +16,11 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.currentUserService.currentUser;
     console.log(this.currentUser.userStats);
+  }
+
+  checkStat(stat:Stat):boolean {
+    if ((stat.easiestAttempted > 0) || (stat.easyAttempted > 0) || (stat.mediumAttempted > 0) || (stat.hardAttempted > 0) || (stat.hardestAttempted > 0)) return true;
+    return false; 
   }
 
 }

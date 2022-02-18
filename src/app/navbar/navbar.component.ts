@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { CurrentUserService } from '../services/current-user.service';
 import { LoginAttempt } from '../models/login-attempt';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ export class NavbarComponent{
   //currentUser!: CurrentUserService;
   currentUser!: User;
 
-  constructor(private user: CurrentUserService) { }
+  constructor(private user: CurrentUserService, private router:Router) { }
 
   submitInfo(): void {
     throw new Error('Method not implemented.');
@@ -40,6 +41,17 @@ export class NavbarComponent{
   }
   logOut():void{
     this.user.currentUser.userId =0;
+  }
+
+  logout():void {
+    this.user.logoutUser().subscribe(
+      (response:number) => {
+        if (response == 0) alert("successfully logged out.")
+
+        //redirect to the main page if not there already
+        this.router.navigateByUrl("");
+      }
+    )
   }
 
 }

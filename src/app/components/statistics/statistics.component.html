@@ -1,5 +1,5 @@
 <section class="vh-100" style="background-color: #eee;">
-    <div class="container" style="margin-top: 30px; border-style: solid; border-color: rgba(0, 0, 0, .125); border-radius: 25px; border-width: 1px;">
+    <div class="container-fluid" style="margin-top: 30px; border-style: solid; border-color: rgba(0, 0, 0, .125); border-radius: 25px; border-width: 1px; max-width:1000px">
         <br>
         <h2 style="text-align:center; color:green">Main Game Stats for {{currentUser.firstName}} {{currentUser.lastName}}</h2>
         <table class = "table table-bordered table-hover">
@@ -15,12 +15,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let stat of currentUser.userStats">
-                    <td>{{stat.categoryName | titlecase}}</td>
-                    <td style="text-align:center">{{stat.easiestCorrect}} / {{stat.easiestAttempted}}</td>
-                    <td style="text-align:center">{{stat.easyCorrect}} / {{stat.easyAttempted}}</td>
-                    <td style="text-align:center">{{stat.mediumCorrect}} / {{stat.mediumAttempted}}</td>
-                    <td style="text-align:center">{{stat.hardCorrect}} / {{stat.hardAttempted}}</td>
-                    <td style="text-align:center">{{stat.hardestCorrect}} / {{stat.hardestAttempted}}</td>
+                    <td *ngIf="checkStat(stat)">{{stat.categoryName | titlecase}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.easiestCorrect}} / {{stat.easiestAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.easyCorrect}} / {{stat.easyAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.mediumCorrect}} / {{stat.mediumAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.hardCorrect}} / {{stat.hardAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.hardestCorrect}} / {{stat.hardestAttempted}}</td>
                 </tr>
             </tbody>
         </table>

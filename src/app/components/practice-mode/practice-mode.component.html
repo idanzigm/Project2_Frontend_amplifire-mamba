@@ -1,40 +1,45 @@
-<div class="container-fluid">
-    <div id="drop-down-menus" style="display:inline-block">
-        <label for="category">Select a Category: </label>
-        <select name="category" id="category" style="margin-right:15px; margin-left:10px;" [(ngModel)]="currentCategoryName" (change)="loadCategoryQuestions()">
-            <option *ngFor="let cat of catArray" value="{{cat.title}}">{{cat.title}}</option>
-        </select>
-
-        <label for="difficulty">Select a Difficulty: </label>
-        <select name="difficulty" id="difficulty" style="margin-left:15px;" [(ngModel)]="currentDifficulty" (change)="difficultyChange()">
-            <option value=0>Easiest</option>
-            <option value="1">Easy</option>
-            <option value="2">Medium</option>
-            <option value="3">Hard</option>
-            <option value="4">Hardest</option>
-        </select>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container-fluid" style="margin-top: 30px; border-style: solid; border-color: rgba(0, 0, 0, .125); border-radius: 25px; border-width: 1px;
+    max-width: 1000px; text-align: center;">
+        <br>
+        <h2 style="color:green">Practice Mode</h2>
+        
+        <div id="drop-down-menus" style="display:inline-block">
+            <label for="category">Select a Category: </label>
+            <select name="category" id="categoryList" style="margin-right:15px; margin-left:10px;" [(ngModel)]="currentCategoryName" (change)="loadCategoryQuestions()">
+                <option *ngFor="let cat of catArray" id = "{{cat.title}}" value="{{cat.title}}">{{cat.title}}</option>
+            </select>
+    
+            <label for="difficulty">Select a Difficulty: </label>
+            <select name="difficulty" id="difficulty" style="margin-left:15px;" [(ngModel)]="currentDifficulty" (change)="difficultyChange()">
+                <option value=0>Easiest</option>
+                <option value=1>Easy</option>
+                <option value=2>Medium</option>
+                <option value=3>Hard</option>
+                <option value=4>Hardest</option>
+            </select>
+        </div>
+    
+        <br>
+        <br>
+    
+        <h3>Question:</h3>
+        <p style="border:1px; border-color:black; border-style:solid; max-width: 300px; min-height: 50px; border-radius: 15px; padding: 5px; margin:auto">{{currentQuestion.question}}</p>
+    
+        <br>
+        <br>
+    
+        <h3>Answer:</h3>
+        <input type="text" [(ngModel)]="userAnswer" style="min-width:500px;">
+    
+        <br>
+        <br>
+    
+        <div id="buttons" style="display:inline-block; margin-bottom: 20px;">
+            <button (click)="getCategoryQuestion()" class="btn btn-secondary" style="margin-right: 15px;">Next Question</button>
+            <button (click)="checkAnswer()" class="btn btn-secondary" style="margin-left: 15px; margin-right: 15px;">Check Answer</button>
+            <button (click)="revealAnswer()" class="btn btn-secondary" style="margin-left: 15px; margin-right: 15px;">Reveal Answer</button>
+        </div>
+    
     </div>
-
-    <br>
-    <br>
-
-    <h3>Question:</h3>
-    <p style="border:1px; border-color:black; border-style:solid;">{{currentQuestion.question}}</p>
-
-    <br>
-    <br>
-
-    <h3>Answer:</h3>
-    <input type="text" [(ngModel)]="userAnswer">
-
-    <br>
-    <br>
-
-    <div id="buttons" style="display:inline-block">
-        <button (click)="getCategoryQuestion()" class="btn btn-secondary" style="margin-right: 15px;">Next Question</button>
-        <button (click)="checkAnswer()" class="btn btn-secondary" style="margin-left: 15px; margin-right: 15px;">Check Answer</button>
-        <button (click)="revealAnswer()" class="btn btn-secondary" style="margin-left: 15px; margin-right: 15px;">Reveal Answer</button>
-        <button class="btn btn-secondary" style="margin-left: 15px;"><a routerLinkActive="true" routerLink="" style="color:white">Back to Main Menu</a></button>
-    </div>
-
-</div>
+</section>

@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         //If the user exists then we get a 200 response and update the current user in the currentUserService
         this.currentUserService.updateUser(data); //the current user is now logged in and we store their information for potential later use
         //console.log(this.currentUserService.currentUser.userStats);
+        this.currentUserService.currentUser
         
         //need to update user on navbar. since navbar is always showing the OnInit() function only gets called once
         

@@ -54,6 +54,14 @@ export class CurrentUserService {
     return this.http.post(this.url + "users", user) as Observable<User>;
   }
 
+  logoutUser():Observable<number> {
+    //if there's currently a user logged in, log them out by making a call to the backend and removing their
+    //stored data in this service
+    let logoutSuccess = this.http.put(this.url + "login", this.currentUser) as Observable<number>;
+    this.removeUser();
+    return logoutSuccess;
+  }
+
   giveCurrentUser():User {
     //this functino is used to pass info on the current user to the components that use this service
     return this.currentUser;

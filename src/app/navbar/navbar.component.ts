@@ -39,6 +39,9 @@ export class NavbarComponent{
     if (this.user.currentUser.userId == 0) return false;
     return true;
   }
+  logOut():void{
+    this.user.currentUser.userId =0;
+  }
 
   logout():void {
     this.user.logoutUser().subscribe(

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
@@ -24,27 +25,37 @@ export class PracticeModeComponent implements OnInit {
   currentCategoryQuestions:Array<Question[]> = [];
 
   constructor(private questionService:QuestionService, private categoryService:CategoryService, private currentUserService:CurrentUserService, 
-    private answerCompare:AnswerCompareService) { }
+    private answerCompare:AnswerCompareService, private router:Router) { }
 
   ngOnInit(): void {
-    this.categoryService.getMostCategories().subscribe(
-      (response:AbridgedCategory[])=> {
-        this.catArray = response;
-        this.catArray.forEach(element => 
-          this.categories.set(element.title, element.id)
-        );
-        
-        //after the categories have been loaded, select a random one to display
-        // let randomNumber:number = Math.floor(Math.random() * this.catArray.length);
-        // let selectedCategory = document.getElementById("categoryList")?.getElementsByTagName("option")[randomNumber];
+    //before doing anything, we need to make sure that a user is actually logged on. for whatever reason if no one's logged in,
+    //we need to restrict access to this page
 
-        // if (selectedCategory != undefined) {
-        //   selectedCategory.selected = true;
-        //   console.log(selectedCategory.value);
-        // }
-        // console.log("yeeet");
-      }
-    )
+    if (this.currentUserService.currentUser.userId != 0) {
+      this.categoryService.getMostCategories().subscribe(
+        (response:AbridgedCategory[])=> {
+          this.catArray = response;
+          this.catArray.forEach(element => 
+            this.categories.set(element.title, element.id)
+          );
+          
+          //after the categories have been loaded, select a random one to display
+          // let randomNumber:number = Math.floor(Math.random() * this.catArray.length);
+          // let selectedCategory = document.getElementById("categoryList")?.getElementsByTagName("option")[randomNumber];
+  
+          // if (selectedCategory != undefined) {
+          //   selectedCategory.selected = true;
+          //   console.log(selectedCategory.value);
+          // }
+          // console.log("yeeet");
+        }
+      );
+    }
+    else {
+      alert("You must be signed in to view this page.");
+      this.router.navigateByUrl(""); //navigate back to the main page
+    }
+    
   }
 
   difficultyChange():void {
@@ -76,16 +87,8 @@ export class PracticeModeComponent implements OnInit {
 
   findCategoryInArray(categoryName:string):number {
     if (this.categories){
-      //console.log("found, id of: "+ this.categories.get(categoryName));
       return this.categories.get(categoryName) as number;
     }
-
-    /*
-    for (let cat of this.categories) {
-      if (cat.title == categoryName) 
-        return cat.id;
-    }
-    */
 
     //if we can't find the category for some reason return a negative number to show an error occured
     return -1;

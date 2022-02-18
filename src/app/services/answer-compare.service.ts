@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class AnswerCompareService {
   //this service is meant to be more of a utility service, really only having functions.
 
-  containsLengthRequirement:number = 6;
+  containsLengthRequirement:number = 8;
   typoLengthRequirement:number = 2;
   typoThreshold:number = 26;
   asciiToValue:number = 96;
@@ -31,21 +31,26 @@ export class AnswerCompareService {
     guess = guess.toLowerCase();
     answer = answer.toLowerCase();
 
-
     //Next order of busines is to check whether or not guess and answer are identical
     if (guess == answer) return true;
 
-    //if we don't have an exact match, check whether or not the the guess string is contained within the answer string. Vice versa,
-    //also check to see if the answer string is contained within the guess. This will allow answers like for things like "The Mets"
-    //vs. "Mets". Before making this kind of check, however, we first make sure that the answer and guess are within a reasonable
-    //length of each other. For example if the answer is "The Pledge of Allegience" and the guess is just "The" then that should
-    //hardly count. The length threshold can be changed and is saved in a Service level variable
+    /*
+    if we don't have an exact match, check whether or not the the guess string is contained within the answer string. Vice versa,
+    also check to see if the answer string is contained within the guess. This will allow answers for things like "The Mets"
+    vs. "Mets". Before making this kind of check, however, we first make sure that the answer and guess are within a reasonable
+    length of each other. For example if the answer is "The Pledge of Allegience" and the guess is just "The" then that should
+    hardly count. The length threshold can be changed and is saved in a global service level variable
+    */
     let diff:number = guess.length - answer.length;
-    if (diff > this.containsLengthRequirement || diff < -this.containsLengthRequirement) return false;
+    if (diff > this.containsLengthRequirement || diff < -this.containsLengthRequirement) return false; //we don't know which is longer so we may get a negaive value (this is ok just check for both)
     
-
-    //We passed the length sanity check so let's see if the answer contains the guess, or vice versa, see if the guess contains 
-    //the answer.
+    /*
+    We passed the length sanity check so let's see if the answer contains the guess, or vice versa, see if the guess contains 
+    the answer. Another great example of why this check is good can be seen in the homphones question category. Some, but not all, answer are structured
+    such that either answer would be correct. i.e. question:"a possesion descriptor or a location" answer:"their/there". In this case I'd
+    expect the user to type out either "their" or "there" for an answer, but not both. This 'contains' check would allow either answer to be
+    excepted (although this wouldn't work as well for long words as the length requirement would still be violated)
+    */
     if (guess.includes(answer) || answer.includes(guess)) return true;
 
     /*
@@ -119,8 +124,6 @@ export class AnswerCompareService {
       totalSameLetters += adder;
     }
 
-    console.log("Meets threshold??" + totalSameLetters + " / " + guessNoPunctLength);
-
     //we now know how many letters are the same between the two words. See if the threshold is met
     if (totalSameLetters / guessNoPunctLength < this.sameLetterThreshold) return false;
 
@@ -131,8 +134,8 @@ export class AnswerCompareService {
     //if none of the above tests pass we must assume the answer is incorrect
     return false;
 
-    //Currently it's possible for answers to slip through the cracks. For example if the answer to a question was "Nashville" and the user answered
+    //Currently it's possible for incorrect answers to slip through the cracks. For example if the answer to a question was "Nashville" and the user answered
     //with "Asheville" this would pass all of our checks even though Nashville is a city in Tennessee and Asheville is in North Carolina. So there's clearly
-    //more work to be done here, however, the algorithm works for a good number of questions currently so we'll leave it as is.
+    //more work to be done here, however, the algorithm works for a good number of questions currently so will leave it as is.
   }
 }

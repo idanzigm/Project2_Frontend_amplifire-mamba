@@ -15,7 +15,6 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.currentUserService.currentUser;
-    console.log(this.currentUser.userStats);
   }
 
   checkStat(stat:Stat):boolean {

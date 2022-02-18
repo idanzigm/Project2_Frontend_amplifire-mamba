@@ -51,8 +51,6 @@ export class CategoryService {
       let currentQuestion: Question = catQuestions[i];
       let clue: string = currentQuestion.question;
       let value: number = currentQuestion.value;
-      console.log("question clue: " + clue);
-      console.log("question value: " + value);
       //Verifies that both the question and the value exist
       //Necessary because some clues/questions don't have a question and/or a value
       if ((clue && value) && (clue != "" && value != 0)) {
@@ -83,7 +81,8 @@ export class CategoryService {
           //With the changes mentioned above this default case shouldn't happen, but we'll keep it for now
           default:
             //some of the questions in the API don't have a value assigned so we must skip these
-            console.log("found a question with no value");
+            //console.log("found a question with no value");
+            break;
         }
       }
     }

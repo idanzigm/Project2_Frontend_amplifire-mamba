@@ -54,6 +54,10 @@ export class CurrentUserService {
     return this.http.post(this.url + "users", user) as Observable<User>;
   }
 
+  createUserDB(user:User):Observable<number> {
+    return this.http.put(this.url + "users", user) as Observable<number>
+  }
+
   logoutUser():Observable<number> {
     //if there's currently a user logged in, log them out by making a call to the backend and removing their
     //stored data in this service
@@ -70,8 +74,6 @@ export class CurrentUserService {
   updateStat(statCategory:string, difficulty:number, correct:boolean):void {
     for (let stat of this.currentUser.userStats) {
       if (stat.categoryName == statCategory) {
-        console.log("found a category match");
-        console.log("difficulty passed to the updateStat function is: " + difficulty);
           if (difficulty == 0) {
             stat.easiestAttempted += 1;
             if (correct) stat.easiestCorrect += 1;

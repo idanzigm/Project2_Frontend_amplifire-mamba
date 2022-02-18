@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
+import { AnswerCompareService } from 'src/app/services/answer-compare.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { QuestionService } from 'src/app/services/question.service';
@@ -22,7 +23,8 @@ export class PracticeModeComponent implements OnInit {
   userAnswer:string = "";
   currentCategoryQuestions:Array<Question[]> = [];
 
-  constructor(private questionService:QuestionService, private categoryService:CategoryService, private currentUserService:CurrentUserService) { }
+  constructor(private questionService:QuestionService, private categoryService:CategoryService, private currentUserService:CurrentUserService, 
+    private answerCompare:AnswerCompareService) { }
 
   ngOnInit(): void {
     this.categoryService.getMostCategories().subscribe(
@@ -96,7 +98,6 @@ export class PracticeModeComponent implements OnInit {
     //TODO: Currently all questions are viewable, if we want to limit the questions that can actually get asked during the practice game this would be the
     //place to do it
 
-    console.log("Values in currentCategoryQuestions: " + this.currentCategoryQuestions);
     let randomNumber:number = Math.floor(Math.random() * this.currentCategoryQuestions[this.currentDifficulty].length)
     this.currentQuestion = this.currentCategoryQuestions[this.currentDifficulty][randomNumber];
     this.userAnswer = ""; //reset whatever answer is currently in the input box
@@ -104,7 +105,7 @@ export class PracticeModeComponent implements OnInit {
 
   checkAnswer():void {
     let correct:boolean = false;
-    if (this.userAnswer == this.currentQuestion.answer) {
+    if (this.answerCompare.compareAnswers(this.userAnswer,this.currentQuestion.answer)) {
       alert("Correct, good job!");
       correct = true;
     }

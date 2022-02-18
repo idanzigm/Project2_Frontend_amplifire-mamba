@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { QmasterComponent } from './components/qmaster/qmaster.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatIconModule } from '@angular/material/icon';
     PracticeModeComponent,
     NavbarComponent,
     UpdateUserComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    QmasterComponent
   ],
   imports: [
     BrowserModule,

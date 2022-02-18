@@ -8,6 +8,7 @@ import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { QmasterComponent } from './components/qmaster/qmaster.component';
 
 const routes: Routes = [{
   path:"",
@@ -33,6 +34,9 @@ const routes: Routes = [{
 },{
   path:"statistics",
   component:StatisticsComponent
+}, {
+  path:"qmaster",
+  component:QmasterComponent
 }
 ];
 

@@ -7,6 +7,7 @@
   <a mat-button routerLinkActive="true" routerLink="game-mode" *ngIf= "userLoggedIn()" >Main Game</a>
 
   <!--<a mat-button routerLinkActive="true" routerLink="test" *ngIf= "userLoggedIn()" >JService API Test Page</a>-->
+  <a mat-button routerLinkActive="true" routerLink="qmaster" *ngIf= "userLoggedIn()" >Quiz Master</a>
 
   <a mat-button routerLinkActive="true" routerLink="practice-mode" *ngIf= "userLoggedIn()" >Practice-Mode</a>
 
@@ -18,6 +19,6 @@
 
   <a mat-raised-button color="accent" routerLinkActive="true" routerLink="register" *ngIf= "!userLoggedIn()">Sign Up</a>
 
-  <button  class="btn btn-danger navbar-btn" *ngIf= "userLoggedIn()">Logout</button>
+  <button  class="btn btn-danger navbar-btn" *ngIf= "userLoggedIn()" (click)="logOut()">Logout</button>
 
 </mat-toolbar>

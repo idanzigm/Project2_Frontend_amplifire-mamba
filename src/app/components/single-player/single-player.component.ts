@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { stringify } from 'querystring';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Answer } from 'src/app/models/answer.model';
 import { Category } from 'src/app/models/category';
@@ -387,23 +388,42 @@ export class SinglePlayerComponent implements OnInit {
 //=======================================================================================
 
   score() : void {
-    if (this.answerStore.length == this.questionStore.length) {
-      let score:number = 0; 
-      for (let a of this.answerStore) {
-        let x:number; 
-        x = a.getId();
-        for (let q of this.questionStore)  {
-          if (q.getId() == x) {
-            if (a.getGivenAnswer() == q.getAnswer()) {
-              score = score + q.getValue(); 
-            }
+    let score:number = 0; 
+    for (let a of this.answerStore) {
+      let x:number; 
+      x = a.getId();
+      for (let q of this.questionStore)  {
+        if (q.getId() == x) {
+          if (a.getGivenAnswer() == q.getAnswer()) {
+            score = score + q.getValue(); 
           }
         }
       }
-      this.displayScore = score; 
-      this.displayCheck = true; 
+    }
+    this.displayScore = score; 
+    this.displayCheck = true; 
+  }
+
+  getGivenAnswer(id:number) : string{
+    let ga:string; 
+    for (let a of this.answerStore) {
+      if (id == a.getId()) {
+        ga = a.getGivenAnswer(); 
+        return ga; 
+      } else {
+        ga = ""; 
+      }
+      return ga; 
+    }
+    return ""; 
+  }
+
+  ngStyle(q:Question) {
+    if (this.getGivenAnswer(q.getId()) == q.getAnswer()) {
+      return "green"
     } else {
-      alert("please attempt all qustions")
+      return "red"
     }
   }
+
 }

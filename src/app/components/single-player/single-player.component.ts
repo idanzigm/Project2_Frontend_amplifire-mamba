@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
+import { Answer } from 'src/app/models/answer.model';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
 import { QuestionService } from 'src/app/services/question.service';
@@ -43,13 +44,16 @@ export class SinglePlayerComponent implements OnInit {
   public c5question600:Question;
   public c5question800:Question;
   public c5question1000:Question;
+  
   public questionStore:Question[]; 
-
-  public AnswerStore:Answer[]; 
+  public answerStore:Answer[]; 
 
   public displayQuestion:string; 
   public displayQuestionID:number
   public displayAnswer:string; 
+  public displayScore:number;
+  public displayCheck:boolean; 
+
   public givenAnswer:string; 
 
   constructor(private questionService:QuestionService) { }
@@ -373,9 +377,33 @@ export class SinglePlayerComponent implements OnInit {
   }
 
   storeAnswer(id:number) : void {
-    let a:Answer; 
-    setId(id); 
-    setAnswer(this.givenAnswer); 
+    let a:Answer = new Answer(); 
+    a.setId(id); 
+    a.setGivenAnswer(this.givenAnswer); 
     this.answerStore.push(a); 
+  }
+
+//=======================================================================================
+//=======================================================================================
+
+  score() : void {
+    if (this.answerStore.length == this.questionStore.length) {
+      let score:number = 0; 
+      for (let a of this.answerStore) {
+        let x:number; 
+        x = a.getId();
+        for (let q of this.questionStore)  {
+          if (q.getId() == x) {
+            if (a.getGivenAnswer() == q.getAnswer()) {
+              score = score + q.getValue(); 
+            }
+          }
+        }
+      }
+      this.displayScore = score; 
+      this.displayCheck = true; 
+    } else {
+      alert("please attempt all qustions")
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { randomInt } from 'crypto';
 import { Observable } from 'rxjs';
 import { AbridgedCategory } from '../models/abridged-category';
 import { Category } from '../models/category';
@@ -52,6 +53,8 @@ export class QuestionService {
   getCategoryId(title:string): Observable<number>{
     return this.http.get(this.backendUrl + "" + title) as Observable<number>;
   }
+
+ 
 
 }
 

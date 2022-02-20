@@ -9,4 +9,20 @@ export class AbridgedCategory {
         this.id = id;
         this.title = title;
     }
+
+    setId(id:number) : void {
+        this.id = id; 
+    }
+
+    getId() : number {
+        return this.id; 
+    }
+
+    setTitle(title:string) : void {
+        this.title = title; 
+    }
+
+    getTitle() : string {
+        return this.title; 
+    }
 }

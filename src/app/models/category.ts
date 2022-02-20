@@ -13,4 +13,15 @@ export class Category {
         this.clues_count = clueCount;
         this.clues = questions;
     }
+
+    setClues(clues:Question[]) : void {
+        this.clues = clues; 
+    }
+
+    getClues() : Question[] {
+        return this.clues; 
+    }
+
+    
+
 }

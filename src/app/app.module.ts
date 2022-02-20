@@ -13,7 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PromptComponent } from './components/prompt/prompt.component';
+import { SinglePlayerComponent } from './components/single-player/single-player.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { PromptComponent } from './components/prompt/prompt.component';
     GameModeComponent,
     PracticeModeComponent,
     NavbarComponent,
-    PromptComponent
+    SinglePlayerComponent
   ],
   imports: [
     BrowserModule,

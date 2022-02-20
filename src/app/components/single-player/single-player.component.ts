@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { stringify } from 'querystring';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Answer } from 'src/app/models/answer.model';
 import { Category } from 'src/app/models/category';
@@ -13,53 +12,55 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class SinglePlayerComponent implements OnInit {
 
-  public category1:Category; 
-  public category2:Category;
-  public category3:Category;
-  public category4:Category;
-  public category5:Category;
-  public popCategories:AbridgedCategory[]; 
+  public category1!: Category; 
+  public category2!: Category;
+  public category3!: Category;
+  public category4!: Category;
+  public category5!: Category;
+  public popCategories!: AbridgedCategory[]; 
 
-  public c1question200:Question;
-  public c1question400:Question;
-  public c1question600:Question;
-  public c1question800:Question;
-  public c1question1000:Question;
-  public c2question200:Question;
-  public c2question400:Question;
-  public c2question600:Question;
-  public c2question800:Question;
-  public c2question1000:Question;
-  public c3question200:Question;
-  public c3question400:Question;
-  public c3question600:Question;
-  public c3question800:Question;
-  public c3question1000:Question;
-  public c4question200:Question;
-  public c4question400:Question;
-  public c4question600:Question;
-  public c4question800:Question;
-  public c4question1000:Question;
-  public c5question200:Question;
-  public c5question400:Question;
-  public c5question600:Question;
-  public c5question800:Question;
-  public c5question1000:Question;
+  public c1question200!: Question;
+  public c1question400!: Question;
+  public c1question600!: Question;
+  public c1question800!: Question;
+  public c1question1000!: Question;
+  public c2question200!: Question;
+  public c2question400!: Question;
+  public c2question600!: Question;
+  public c2question800!: Question;
+  public c2question1000!: Question;
+  public c3question200!: Question;
+  public c3question400!: Question;
+  public c3question600!: Question;
+  public c3question800!: Question;
+  public c3question1000!: Question;
+  public c4question200!: Question;
+  public c4question400!: Question;
+  public c4question600!: Question;
+  public c4question800!: Question;
+  public c4question1000!: Question;
+  public c5question200!: Question;
+  public c5question400!: Question;
+  public c5question600!: Question;
+  public c5question800!: Question;
+  public c5question1000!: Question;
   
-  public questionStore:Question[]; 
-  public answerStore:Answer[]; 
+  public questionStore:Question[] = []; 
+  public answerStore:Answer[] = []; 
 
-  public displayQuestion:string; 
-  public displayQuestionID:number
-  public displayAnswer:string; 
-  public displayScore:number;
-  public displayCheck:boolean; 
+  public displayQuestion:string = ""; 
+  public displayQuestionID:number = 0; 
+  public displayAnswer:string = ""; 
+  public displayScore:number = 0;
+  public displayCheck:boolean = false; 
 
-  public givenAnswer:string; 
+  public givenAnswer:string = ""; 
 
   constructor(private questionService:QuestionService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.generateBoard(); 
+  }
 
   setCategory1(c:Category) {
     this.category1 = c; 
@@ -113,6 +114,8 @@ export class SinglePlayerComponent implements OnInit {
   //============================================================================
 
   generateBoard() : void {
+    this.displayCheck = false; 
+    this.displayScore = 0; 
     this.setEachCategory(); 
     this.setQuestionStore(); 
   }
@@ -121,7 +124,7 @@ export class SinglePlayerComponent implements OnInit {
   //============================================================================
 
   setEachCategory() : void {
-    this.questionService.getMostCategories().subscribe((mostPopularArray:Array<AbridgedCategory>) {
+    this.questionService.getMostCategories().subscribe((mostPopularArray:Array<AbridgedCategory>) => {
       this.popCategories = mostPopularArray as AbridgedCategory[]
     });
     for (let i =0; i<5; i++) {
@@ -378,9 +381,7 @@ export class SinglePlayerComponent implements OnInit {
   }
 
   storeAnswer(id:number) : void {
-    let a:Answer = new Answer(); 
-    a.setId(id); 
-    a.setGivenAnswer(this.givenAnswer); 
+    let a:Answer = new Answer(id, this.givenAnswer); 
     this.answerStore.push(a); 
   }
 

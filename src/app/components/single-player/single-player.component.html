@@ -6,59 +6,81 @@
     <title>Single Player Mode</title>
 </head>
 <body>
-    <br>
+    <a mat-button routerLinkActive="true" routerLink="">exit</a>
     <br> 
     <div>
-        <table "col-sm-2">
+        <table class = "col-sm-2">
             <tr>
-                <form id = "myForm"> <!--needs to auto-recommend categories-->
-                    <th><label>Category 1:</label></th>
-                    <th><label>Category 2:</label></th>
-                    <th><label>Category 3:</label></th>
-                    <th><label>Category 4:</label></th>
-                    <th><label>Category 5:</label></th>
-                </form>
+                <th [category] = "category1">{{category1.getTitle()}}</th>
+                <th [category] = "category2">{{category2.getTitle()}}</th>
+                <th [category] = "category3">{{category3.getTitle()}}</th>
+                <th [category] = "category4">{{category4.getTitle()}}</th>
+                <th [category] = "category5">{{category5.getTitle()}}</th>
             </tr>
             <tr>
-                <td>200</td>
-                <td>200</td>
-                <td>200</td>
-                <td>200</td>
-                <td>200</td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c1question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c2question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c3question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c4question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c5question200)"></td>
             </tr>
             <tr>
-                <td>400</td>
-                <td>400</td>
-                <td>400</td>
-                <td>400</td>
-                <td>400</td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c1question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c2question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c3question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c4question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c5question400)"></td>
             </tr>
             <tr>
-                <td>600</td>
-                <td>600</td>
-                <td>600</td>
-                <td>600</td>
-                <td>600</td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c1question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c2question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c3question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c4question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c5question600)"></td>
             </tr>
             <tr>
-                <td>800</td>
-                <td>800</td>
-                <td>800</td>
-                <td>800</td>
-                <td>800</td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c1question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c2question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c3question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c4question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c5question800)"></td>
             </tr>
             <tr>
-                <td>1000</td>
-                <td>1000</td>
-                <td>1000</td>
-                <td>1000</td>
-                <td>1000</td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c1question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c2question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c3question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c4question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c5question1000)"></td>
             </tr>
         </table>
     </div>
     <div>
-        <span><input type = "submit" form = "myform" value = "Generate"></span>
-        <span><input type = "submit" form = "tbd" value = "Score"></span> <!--needs to turn blank until all questions are submitted-->
+        <p>{{displayQuestion}}</p>
+        <form id="Aswer">
+        <p><label>Answer</label><input type="text" [(ngModel)] = “givenAnswer” ></p>
+        <p><input type="submit" (click) = "storeAnswer({{displayQuestionID}})"></p>
+        </form>
+    </div>
+    <div>
+        <span><input type = "submit" value = "Generate" (click) = "generateBoard()"></span>
+        <span><input type = "submit" value = "Score" (click)="score()"></span> 
+    </div>
+    <div *ngIf displayCheck="true">
+        <p>You Scored: {{displayScore}}</p>
+        <table >
+            <tr>
+                <th>Question ID</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Your Answer</th>
+            </tr>
+            <tr *ngFor = "getQuestionStore()">
+                <td [ngStyle] = "ngStyle(question[0])">{{question[0].getId()}}</td>
+                <td [ngStyle] = "ngStyle(question[0])">{{question[0].getQuestion()}}</td>
+                <td [ngStyle] = "ngStyle(question[0])">{{question[0].getAnswer()}}</td>
+                <td [ngStyle] = "ngStyle(question[0])">{{getGivenAnswer(question[0].getId())}}</td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>

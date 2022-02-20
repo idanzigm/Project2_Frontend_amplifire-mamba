@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+//import { randomInt } from 'crypto';
 import { Observable } from 'rxjs';
 import { AbridgedCategory } from '../models/abridged-category';
 import { Category } from '../models/category';
@@ -44,6 +45,7 @@ export class QuestionService {
   getMostCategories(): Observable<AbridgedCategory[]> {
     return this.http.get(this.backendUrl + 'mpcategories') as Observable<AbridgedCategory[]>;
   }
+
 */
 }
 

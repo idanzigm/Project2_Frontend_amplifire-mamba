@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SinglePlayerComponent } from './components/single-player/single-player.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 import { TestBed } from '@angular/core/testing';
@@ -34,6 +35,7 @@ import { User } from './models/user';
     GameModeComponent,
     PracticeModeComponent,
     NavbarComponent,
+    SinglePlayerComponent
     UpdateUserComponent,
     StatisticsComponent,
     QmasterComponent

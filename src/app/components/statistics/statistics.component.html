@@ -1,0 +1,28 @@
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container-fluid" style="margin-top: 30px; border-style: solid; border-color: rgba(0, 0, 0, .125); border-radius: 25px; border-width: 1px; max-width:1000px">
+        <br>
+        <h2 style="text-align:center; color:green">Main Game Stats for {{currentUser.firstName}} {{currentUser.lastName}}</h2>
+        <table class = "table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Category</th>
+                    <th style="text-align:center">Easiest Correct %</th>
+                    <th style="text-align:center">Easy Correct %</th>
+                    <th style="text-align:center">Medium Correct %</th>
+                    <th style="text-align:center">Hard Correct %</th>
+                    <th style="text-align:center">Hardest Correct %</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stat of currentUser.userStats">
+                    <td *ngIf="checkStat(stat)">{{stat.categoryName | titlecase}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.easiestCorrect}} / {{stat.easiestAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.easyCorrect}} / {{stat.easyAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.mediumCorrect}} / {{stat.mediumAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.hardCorrect}} / {{stat.hardAttempted}}</td>
+                    <td *ngIf="checkStat(stat)" style="text-align:center">{{stat.hardestCorrect}} / {{stat.hardestAttempted}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

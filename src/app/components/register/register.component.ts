@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   repeatPassword:string = "";
   checked:boolean = false;
 
-  constructor(private userService:CurrentUserService) { }
+  constructor(private userService:CurrentUserService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
     }
     else {
       //first create a new user object
-      let user:User = new User(0, this.username, this.password, this.email, this.firstName, "");
+      let user:User = new User(0, this.username, this.password, this.email, this.firstName, "", []);
 
       //we only have a single input box for name. Need a little function to split up first name and last name.
       //if no last name was given the field will be left blank (last name can be blank in the database but firstname can't)
@@ -57,8 +58,11 @@ export class RegisterComponent implements OnInit {
 
       //create new user here using the userService
       this.userService.createUser(user).subscribe(
-        (resposne:User)=>{
-
+        (response:User)=>{
+          //successfully created a new user, make sure to log them in and then redirect to the main page
+          this.userService.updateUser(response);
+          alert("New user was created successfully!");
+          this.router.navigateByUrl("");
         }
       )
     }

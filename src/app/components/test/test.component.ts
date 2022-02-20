@@ -4,6 +4,7 @@ import {Category} from 'src/app/models/category';
 import { QuestionService } from 'src/app/services/question.service';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Observable } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-test',
@@ -14,12 +15,12 @@ export class TestComponent implements OnInit {
 
   questions:any[] = [];
   mostQuestions:AbridgedCategory[] = [];
-  categoryNumber:number = 0;
+  categoryNumber:number = 25;
   continue:boolean = true;
   maxQuestionsLimit:number = 75; //dictates the maximum size of the 'mostQuestions' array
   paginationAmount:number = 100; //100 is the maximum for pagination
 
-  constructor(private quest:QuestionService) { }
+  constructor(private quest:QuestionService, private cat:CategoryService) { }
 
   ngOnInit(): void {
   }
@@ -34,7 +35,7 @@ export class TestComponent implements OnInit {
 
   getCategoryQuestions(cat:number):void {
     this.continue = false;
-    this.quest.getQuestionsByCategory(cat).subscribe(
+    this.cat.getQuestionsByCategory(cat).subscribe(
       (response:Category) => {
         this.questions = [];
         for (let currentQuestion of response.clues) {
@@ -48,7 +49,7 @@ export class TestComponent implements OnInit {
 
   async getMostPopulousCategories(offset:number): Promise<boolean> {
     //100 is the maximum pagination value for the api
-    let response:AbridgedCategory[] = await this.quest.getCategories(offset, this.paginationAmount);
+    let response:AbridgedCategory[] = await this.cat.getCategories(offset, this.paginationAmount);
 
     for (let currentCategory of response) {
       let currentAmount:number = currentCategory.clues_count;
@@ -107,7 +108,7 @@ export class TestComponent implements OnInit {
       alert("There aren't any categories to send.")
     }
     else {
-      this.quest.sendMostCategories(this.mostQuestions).subscribe(
+      this.cat.sendMostCategories(this.mostQuestions).subscribe(
         (response:number) => {
           if (response == 0) console.log("Successfully added categories!")
           else console.log("Something went wrong.")

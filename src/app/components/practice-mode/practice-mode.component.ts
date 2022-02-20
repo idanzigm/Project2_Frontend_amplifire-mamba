@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
+import { AnswerCompareService } from 'src/app/services/answer-compare.service';
+import { CategoryService } from 'src/app/services/category.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
@@ -11,26 +15,52 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class PracticeModeComponent implements OnInit {
 
-  categories:AbridgedCategory[] = [];
+  categories:Map<string, number> = new Map<string, number>();
+  catArray:AbridgedCategory[] = [];
   currentCategoryName:string = "";
-  currentCategoryQuestions:Array<Question[]> = []; //TODO: It probably makes more sense to get all category questions in a category service and inject it into here (could also inject into main game mode)
   displayCategory:string = "";
   currentDifficulty:number= 0;
   currentQuestion:Question = new Question(0, "", "", 0, new Category(0, "", 0, []), "");
   userAnswer:string = "";
+  currentCategoryQuestions:Array<Question[]> = [];
 
-  constructor(private questionService:QuestionService) { }
+  constructor(private questionService:QuestionService, private categoryService:CategoryService, private currentUserService:CurrentUserService, 
+    private answerCompare:AnswerCompareService, private router:Router) { }
 
   ngOnInit(): void {
-    this.questionService.getMostCategories().subscribe(
-      (response:AbridgedCategory[])=> {
-        this.categories = response;
-      }
-    )
+    //before doing anything, we need to make sure that a user is actually logged on. for whatever reason if no one's logged in,
+    //we need to restrict access to this page
+
+    if (this.currentUserService.currentUser.userId != 0) {
+      this.categoryService.getMostCategories().subscribe(
+        (response:AbridgedCategory[])=> {
+          this.catArray = response;
+          this.catArray.forEach(element => 
+            this.categories.set(element.title, element.id)
+          );
+          
+          //after the categories have been loaded, select a random one to display
+          // let randomNumber:number = Math.floor(Math.random() * this.catArray.length);
+          // let selectedCategory = document.getElementById("categoryList")?.getElementsByTagName("option")[randomNumber];
+  
+          // if (selectedCategory != undefined) {
+          //   selectedCategory.selected = true;
+          //   console.log(selectedCategory.value);
+          // }
+          // console.log("yeeet");
+        }
+      );
+    }
+    else {
+      alert("You must be signed in to view this page.");
+      this.router.navigateByUrl(""); //navigate back to the main page
+    }
+    
   }
 
   difficultyChange():void {
     //when the difficulty changes reset the question that's currently displaying
+    this.loadCategoryQuestions();
     this.getCategoryQuestion();
     this.userAnswer = "";
   }
@@ -41,98 +71,23 @@ export class PracticeModeComponent implements OnInit {
     this.currentQuestion = new Question(0, "", "", 0, new Category(0, "", 0, []), "");
     this.userAnswer = "";
 
-    //first make sure we didn't re-select the same category
     if (this.currentCategoryName != this.displayCategory) {
-      this.questionService.getQuestionsByCategory(this.findCategoryInArray(this.currentCategoryName)).subscribe(
+      this.categoryService.getQuestionsByCategory(this.findCategoryInArray(this.currentCategoryName)).subscribe(
         (response:Category) => {
-          //get all of the clues from the category and sory into separate arrays based on difficulty
-          let allQuestions:Question[] = response.clues;
-
-          let easiestQuestions:Question[] = [];
-          let easyQuestions:Question[] = [];
-          let mediumQuestions:Question[] = [];
-          let hardQuestions:Question[] = [];
-          let hardestQuestions:Question[] = [];
-
-          let easiestValue:number = 100;
-          let easyValue:number = 200;
-          let mediumValue:number = 300;
-          let hardValue:number = 400;
-          let hardestValue:number = 500;
-          
-          for (let i:number = 0; i < allQuestions.length; i++) {
-            //point values in jeopardy doubled in the year 2001. Before the increase the values were $100, $200, $300, $400 and $500.
-            //After the increase the values went up to $200, $400, $600, $800 and $1000 respectively. The only overlap is with $200 and $400
-            //questions. TODO: Add a timestamp to the Question class that will allow us to figure out how difficult $200 and $400 questions are.
-            //For now, however, we can just look at the next question in the array to help
-
-            //Verifies that both the question and the value exist
-            //Necessary because some clues/questions don't have a question and/or a value
-            //Note: I wasn't sure if I should check for empty strings and 0, or if I should check for undefined
-            if ((allQuestions[i].question && allQuestions[i].value) || (allQuestions[i].question != "" && allQuestions[i].value != 0)){
-              //Update: there are now variables for the values of easiest, easy, medium, hard, and hardest questions
-              //If the airdate year is 2001 or later the initial values will be doubled
-              //If we decide to implement some kind of functionality similar to double jeopardy, we can just write another conditional
-              //and update the values as necessary
-              //Side bonus: the use of variable also makes the code a little easier to follow
-              if (parseInt(allQuestions[i].airdate.substring(5)) >= 2001){
-                easiestValue *= 2;
-                easyValue *= 2;
-                mediumValue *= 2;
-                hardValue *= 2;
-                hardestValue *= 2;
-              }
-              
-              switch (allQuestions[i].value) {
-                case easiestValue:
-                  easiestQuestions.push(allQuestions[i]);
-                  break;
-                case easyValue:
-                  easyQuestions.push(allQuestions[i]);
-                  break;
-                case mediumValue:
-                  mediumQuestions.push(allQuestions[i]);
-                  break;
-                case hardValue:
-                  hardQuestions.push(allQuestions[i]);
-                  break;
-                case hardestValue:
-                  hardestQuestions.push(allQuestions[i]);
-                  break;
-                //With the changes mentioned above this default case shouldn't happen, but we'll keep it for now
-                default:
-                  //some of the questions in the API don't have a value assigned so we must skip these
-                  console.log("found a question with no value");
-              }
-            }
-          }
-
-          //after going through each question, add the individual question arrays to the currentCategoryQuestions array
-          this.currentCategoryQuestions = []; //before adding new questions, make sure to remove any existing questions
-          this.currentCategoryQuestions.push(easiestQuestions);
-          this.currentCategoryQuestions.push(easyQuestions);
-          this.currentCategoryQuestions.push(mediumQuestions);
-          this.currentCategoryQuestions.push(hardQuestions);
-          this.currentCategoryQuestions.push(hardestQuestions);
-
+          let cat:Category = response;
+          let catQuestions:Question[] = cat.clues;
+          this.currentCategoryQuestions = this.categoryService.sortByDifficulty(catQuestions);
           this.displayCategory = this.currentCategoryName;
-
           //After loading a new category, display a question in the text box
           this.getCategoryQuestion();
         }
-      )
+      );
     }
   }
 
   findCategoryInArray(categoryName:string):number {
-    //returns the location of the given category in the this.categories array.
-    //TODO: I don't like this function, see about making a better way of just storing these values somewhere
-
-    //Idea: query the database in the backend.  Isn't there a table with this information stored?
-    //We can create a method in the question service to query the backend
-    console.log(categoryName);
-    for (let cat of this.categories) {
-      if (cat.title == categoryName) return cat.id;
+    if (this.categories){
+      return this.categories.get(categoryName) as number;
     }
 
     //if we can't find the category for some reason return a negative number to show an error occured
@@ -145,14 +100,24 @@ export class PracticeModeComponent implements OnInit {
 
     //TODO: Currently all questions are viewable, if we want to limit the questions that can actually get asked during the practice game this would be the
     //place to do it
+
     let randomNumber:number = Math.floor(Math.random() * this.currentCategoryQuestions[this.currentDifficulty].length)
     this.currentQuestion = this.currentCategoryQuestions[this.currentDifficulty][randomNumber];
     this.userAnswer = ""; //reset whatever answer is currently in the input box
   }
 
   checkAnswer():void {
-    if (this.userAnswer == this.currentQuestion.answer) alert("Correct, good job!");
-    else alert("Sorry incorrect, please try again.");
+    let correct:boolean = false;
+    if (this.answerCompare.compareAnswers(this.userAnswer,this.currentQuestion.answer)) {
+      alert("Correct, good job!");
+      correct = true;
+    }
+    else {
+      alert("Sorry incorrect, please try again.");
+    }
+    //update statistics for user on incorrect answer
+    //TODO: This functionality should only be in main game mode, but I'm putting it here now to test
+    this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, correct);
   }
 
   revealAnswer():void {

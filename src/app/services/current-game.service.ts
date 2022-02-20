@@ -42,7 +42,7 @@ export class CurrentGameService {
         for (let i:number = 0; i < 6; i++) {
           this.categoryService.getQuestionsByCategory(this.categories[i].id).subscribe(
             (response:Category) => {
-              //console.log(response);
+              console.log(response);
               let randomNumber:number = 0;
               let catYear:number = 0;
               while (true) {
@@ -66,5 +66,9 @@ export class CurrentGameService {
         }
       }
     )
+  }
+
+  endGame():void {
+
   }
 }

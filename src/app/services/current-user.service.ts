@@ -12,17 +12,18 @@ export class CurrentUserService {
   //this service will hold data about the currently signed in user and will be able to be accessed from 
   //the necessary components
   currentUser:User;
-  url:string = "http://localhost:8083/";
-  //url:string = 'http://35.174.167.115:7000/';
+  //url:string = "http://localhost:8083/";
+  url:string = 'http://35.174.167.115:7000/';
 
   constructor(private http:HttpClient) { 
     this.currentUser  = new User(0, "", "", "", "", "", []); //starts off as a blank user upon instantiation
     
-    //TODO: Remove when done with testing
-    this.loginForTesting();
   }
 
   loginForTesting() {
+    //This was a function to make life easier while in the testing phase, it can be safely deleted but is left here
+    //for legacy purposes
+
     //because of Angular's hot reloading, everytime I make a change the page reloads which will log out the
     //current user. This is getting annoying during testing so I'm writing this function to just automatically
     //log in a user upon initial application load

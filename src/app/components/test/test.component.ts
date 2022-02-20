@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { CurrentGameService } from 'src/app/services/current-game.service';
 import { AnswerCompareService } from 'src/app/services/answer-compare.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-test',
@@ -36,10 +37,12 @@ export class TestComponent implements OnInit {
   hardValue:string = "";
   hardestValue:string = "";
   currentClickedButton:string = "";
+  currentlySelectedCategory:string = "";
+  currentlySelectedDifficutly:number = 0;
   potentialPointValue:number = 0;
   totalPoints:number = 0;
 
-  constructor(private quest:QuestionService, private cat:CategoryService, private currentGame:CurrentGameService, private answerService:AnswerCompareService) { }
+  constructor(private quest:QuestionService, private cat:CategoryService, private currentGame:CurrentGameService, private answerService:AnswerCompareService, private currentUserService:CurrentUserService) { }
 
   ngOnInit(): void {
     this.currentGame.newGame();
@@ -181,6 +184,9 @@ export class TestComponent implements OnInit {
     this.potentialPointValue = question * 100 + 100;
     console.log(this.potentialPointValue);
 
+    this.currentlySelectedCategory = this.currentGame.categories[category].title;
+    this.currentlySelectedDifficutly = question;
+
     //unhide question elements
     let questionHeader = document.getElementById("question-header");
     if (questionHeader != null) questionHeader.hidden = false;
@@ -217,6 +223,9 @@ export class TestComponent implements OnInit {
       //change color of clicked answer button to red and remove click functionality
       if (currentButton != null) currentButton.className = "btn btn-danger navbar-btn"
     }
+
+    //regardless of a correct or incorrect response we need to update the stat for the user
+    this.currentUserService.updateStat(this.currentlySelectedCategory, this.currentlySelectedDifficutly, correct);
 
     //set current question elements to hidden
     let questionHeader = document.getElementById("question-header");

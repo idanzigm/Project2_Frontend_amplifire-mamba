@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Answer } from 'src/app/models/answer.model';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
@@ -17,7 +16,7 @@ export class SinglePlayerComponent implements OnInit {
   public category3!: Category;
   public category4!: Category;
   public category5!: Category;
-  public popCategories!: AbridgedCategory[]; 
+  public popCategories: Array<number> = [320, 301, 275, 265, 260, 255, 250, 245, 240, 235, 230, 225, 220, 217, 215, 200, 195, 190, 185, 175, 165, 160, 155, 150, 146, 145, 140, 135, 130, 127, 125, 120, 115, 110, 105]; 
 
   public c1question200!: Question;
   public c1question400!: Question;
@@ -118,44 +117,79 @@ export class SinglePlayerComponent implements OnInit {
   //============================================================================
 
   generateBoard() : void {
+    console.log("inside generateBoard"); 
     this.displayCheck = false; 
     this.displayScore = 0; 
-    this.setEachCategory(); 
-    this.setQuestionStore(); 
+    this.setEachCategoryAndQuestionStore(); 
   }
 
   //============================================================================
   //============================================================================
 
-  setEachCategory() : void {
-    this.questionService.getMostCategories().subscribe((mostPopularArray:Array<AbridgedCategory>) => {
-      this.popCategories = mostPopularArray as AbridgedCategory[]
-    });
-    for (let i =0; i<5; i++) {
+  setEachCategoryAndQuestionStore() : void {
+    console.log("inside setEachCategory"); 
+    console.log("popCategories:")
+    console.log(this.popCategories); 
+    for (let i=0; i<5; i++) {
       let x = Math.floor(Math.random() * this.popCategories.length); 
-      if (i=0) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
-          this.category1 = category as Category
+      console.log("x = " + x + " at " + i)
+      if (i==0) {
+        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+          this.category1 = category as Category; 
+          console.log("category1:"); 
+          console.log(this.category1);
+
+          this.setQuestionStoreCategory1();  
+          console.log("questionStore"); 
+          console.log(this.questionStore); 
         })
+        
       } 
-      if (i=1) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
-          this.category2 = category as Category
+      if (i==1) {
+        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+          this.category2 = category as Category; 
+          console.log("category2:"); 
+          console.log(this.category2);
+
+          this.setQuestionStoreCategory2();
+          console.log("questionStore"); 
+          console.log(this.questionStore); 
         })
+        
       }
-      if (i=2) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
-          this.category3 = category as Category
+      if (i==2) {
+        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+          this.category3 = category as Category; 
+          console.log("category3:"); 
+          console.log(this.category3);
+
+          this.setQuestionStoreCategory3();
+          console.log("questionStore"); 
+          console.log(this.questionStore); 
         })
+        
       }
-      if (i=3) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
-          this.category4 = category as Category
+      if (i==3) {
+        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+          this.category4 = category as Category;
+          console.log("category4:"); 
+          console.log(this.category4); 
+
+          this.setQuestionStoreCategory4();
+          console.log("questionStore"); 
+          console.log(this.questionStore); 
         })
+        
       }
-      if (i=4) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
-          this.category5 = category as Category
+      if (i==4) {
+        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+          this.category5 = category as Category; 
+          console.log("category5:")
+          console.log(this.category5);
+
+          this.setQuestionStoreCategory5();
+          console.log("questionStore"); 
+          console.log(this.questionStore); 
         })
       }
     } 
@@ -164,7 +198,7 @@ export class SinglePlayerComponent implements OnInit {
   //============================================================================
   //============================================================================
 
-  setQuestionStore() : void {
+  setQuestionStoreCategory1() : void {
     let c1questions200 = []; 
     c1questions200 = this.get200(this.category1.getClues()); 
     let x:number = Math.floor(Math.random() * c1questions200.length); 
@@ -194,12 +228,14 @@ export class SinglePlayerComponent implements OnInit {
     x = Math.floor(Math.random() * c1questions1000.length); 
     this.c1question1000 = c1questions1000[x]; 
     this.questionStore.push(this.c1question1000); 
+  }
 
 //============================================================================
 
+  setQuestionStoreCategory2() : void {
     let c2questions200 = []; 
     c2questions200 = this.get200(this.category2.getClues()); 
-    x = Math.floor(Math.random() * c2questions200.length); 
+    let x = Math.floor(Math.random() * c2questions200.length); 
     this.c2question200 = c2questions200[x]; 
     this.questionStore.push(this.c2question200);
 
@@ -226,17 +262,18 @@ export class SinglePlayerComponent implements OnInit {
     x = Math.floor(Math.random() * c2questions1000.length); 
     this.c2question1000 = c2questions1000[x]; 
     this.questionStore.push(this.c2question1000);
+  }
 
 //============================================================================
 
+  setQuestionStoreCategory3() : void {
     let c3questions200 = []; 
     c3questions200 = this.get200(this.category3.getClues()); 
-    x = Math.floor(Math.random() * c3questions200.length); 
+    let x = Math.floor(Math.random() * c3questions200.length); 
     this.c3question200 = c3questions200[x]; 
     this.questionStore.push(this.c3question200);
 
-    let c3questions400 = []; 
-    c3questions400 = this.get400(this.category3.getClues()); 
+    let c3questions400 = [this.get400(this.category3.getClues())];  
     x = Math.floor(Math.random() * c3questions400.length); 
     this.c3question400 = c3questions400[x];
     this.questionStore.push(this.c3question400);
@@ -258,12 +295,14 @@ export class SinglePlayerComponent implements OnInit {
     x = Math.floor(Math.random() * c3questions1000.length); 
     this.c3question1000 = c3questions1000[x];
     this.questionStore.push(this.c3question1000);
+  }
 
 //============================================================================
 
+  setQuestionStoreCategory4() : void {
     let c4questions200 = []; 
     c4questions200 = this.get200(this.category4.getClues()); 
-    x = Math.floor(Math.random() * c4questions200.length); 
+    let x = Math.floor(Math.random() * c4questions200.length); 
     this.c4question200 = c4questions200[x];
     this.questionStore.push(this.c4question200);
 
@@ -290,12 +329,14 @@ export class SinglePlayerComponent implements OnInit {
     x = Math.floor(Math.random() * c4questions1000.length); 
     this.c4question1000 = c4questions1000[x];
     this.questionStore.push(this.c4question1000);
+  }
 
 //============================================================================
 
+  setQuestionStoreCategory5() : void {
     let c5questions200 = []; 
     c5questions200 = this.get200(this.category5.getClues()); 
-    x = Math.floor(Math.random() * c5questions200.length); 
+    let x = Math.floor(Math.random() * c5questions200.length); 
     this.c5question200 = c5questions200[x];
     this.questionStore.push(this.c5question200);
 

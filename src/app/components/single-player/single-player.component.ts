@@ -56,11 +56,11 @@ export class SinglePlayerComponent implements OnInit {
 
   public givenAnswer:string = "Enter Answer Here"; 
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
   constructor(private questionService:QuestionService, private getQuestionsByCategory: CategoryService) { }
-=======
-  constructor(private questionService:QuestionService, private categoryService:CategoryService) { }
->>>>>>> 437fc3e4a6de7c507986ab153c8e725f5b9a0ee2
+// =======
+//   constructor(private questionService:QuestionService, private categoryService:CategoryService) { }
+// >>>>>>> 437fc3e4a6de7c507986ab153c8e725f5b9a0ee2
 
   ngOnInit(): void {
     this.generateBoard(); 

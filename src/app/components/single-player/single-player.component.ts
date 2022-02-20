@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Answer } from 'src/app/models/answer.model';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
+import { CategoryService } from 'src/app/services/category.service';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
@@ -55,7 +56,7 @@ export class SinglePlayerComponent implements OnInit {
 
   public givenAnswer:string = "Enter Answer Here"; 
 
-  constructor(private questionService:QuestionService) { }
+  constructor(private questionService:QuestionService, private getQuestionsByCategory: CategoryService) { }
 
   ngOnInit(): void {
     this.generateBoard(); 

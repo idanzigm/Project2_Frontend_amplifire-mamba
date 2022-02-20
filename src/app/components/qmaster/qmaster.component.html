@@ -1,0 +1,9 @@
+<button (click)="setTeams(num)" class="btn btn-secondary" style="margin-right: 15px;">Enter number of teams</button>
+<input type="number" placeholder="Enter number of teams" [(ngModel)]="num">
+<br>
+<br>
+<div *ngIf = "showNameSelectors">
+    <!-- <p *ngFor="let _ of [].constructor(numTeams)">Selectors here <br></p> -->
+    <div *ngFor="let i of Arr(num).fill(1); let ind = index;"> Select name for Team {{ind+1}}  <input type="text"></div>
+    
+</div>

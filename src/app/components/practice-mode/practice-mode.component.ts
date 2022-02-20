@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
+import { AnswerCompareService } from 'src/app/services/answer-compare.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
@@ -21,18 +24,38 @@ export class PracticeModeComponent implements OnInit {
   userAnswer:string = "";
   currentCategoryQuestions:Array<Question[]> = [];
 
-  constructor(private questionService:QuestionService, private categoryService:CategoryService) { }
+  constructor(private questionService:QuestionService, private categoryService:CategoryService, private currentUserService:CurrentUserService, 
+    private answerCompare:AnswerCompareService, private router:Router) { }
 
   ngOnInit(): void {
-    this.categoryService.getMostCategories().subscribe(
-      (response:AbridgedCategory[])=> {
-        this.catArray = response;
-        this.catArray.forEach(element => 
-          this.categories.set(element.title, element.id)
-        );
-        console.log(this.categories);
-      }
-    )
+    //before doing anything, we need to make sure that a user is actually logged on. for whatever reason if no one's logged in,
+    //we need to restrict access to this page
+
+    if (this.currentUserService.currentUser.userId != 0) {
+      this.categoryService.getMostCategories().subscribe(
+        (response:AbridgedCategory[])=> {
+          this.catArray = response;
+          this.catArray.forEach(element => 
+            this.categories.set(element.title, element.id)
+          );
+          
+          //after the categories have been loaded, select a random one to display
+          // let randomNumber:number = Math.floor(Math.random() * this.catArray.length);
+          // let selectedCategory = document.getElementById("categoryList")?.getElementsByTagName("option")[randomNumber];
+  
+          // if (selectedCategory != undefined) {
+          //   selectedCategory.selected = true;
+          //   console.log(selectedCategory.value);
+          // }
+          // console.log("yeeet");
+        }
+      );
+    }
+    else {
+      alert("You must be signed in to view this page.");
+      this.router.navigateByUrl(""); //navigate back to the main page
+    }
+    
   }
 
   difficultyChange():void {
@@ -63,17 +86,9 @@ export class PracticeModeComponent implements OnInit {
   }
 
   findCategoryInArray(categoryName:string):number {
-    console.log(categoryName);
     if (this.categories){
       return this.categories.get(categoryName) as number;
     }
-
-    /*
-    for (let cat of this.categories) {
-      if (cat.title == categoryName) 
-        return cat.id;
-    }
-    */
 
     //if we can't find the category for some reason return a negative number to show an error occured
     return -1;
@@ -85,15 +100,24 @@ export class PracticeModeComponent implements OnInit {
 
     //TODO: Currently all questions are viewable, if we want to limit the questions that can actually get asked during the practice game this would be the
     //place to do it
-    console.log("Values in currentCategoryQuestions: " + this.currentCategoryQuestions);
+
     let randomNumber:number = Math.floor(Math.random() * this.currentCategoryQuestions[this.currentDifficulty].length)
     this.currentQuestion = this.currentCategoryQuestions[this.currentDifficulty][randomNumber];
     this.userAnswer = ""; //reset whatever answer is currently in the input box
   }
 
   checkAnswer():void {
-    if (this.userAnswer == this.currentQuestion.answer) alert("Correct, good job!");
-    else alert("Sorry incorrect, please try again.");
+    let correct:boolean = false;
+    if (this.answerCompare.compareAnswers(this.userAnswer,this.currentQuestion.answer)) {
+      alert("Correct, good job!");
+      correct = true;
+    }
+    else {
+      alert("Sorry incorrect, please try again.");
+    }
+    //update statistics for user on incorrect answer
+    //TODO: This functionality should only be in main game mode, but I'm putting it here now to test
+    this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, correct);
   }
 
   revealAnswer():void {

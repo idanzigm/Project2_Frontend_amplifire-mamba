@@ -17,6 +17,20 @@ export class CurrentUserService {
 
   constructor(private http:HttpClient) { 
     this.currentUser  = new User(0, "", "", "", "", "", []); //starts off as a blank user upon instantiation
+    
+    //TODO: Remove when done with testing
+    this.loginForTesting();
+  }
+
+  loginForTesting() {
+    //because of Angular's hot reloading, everytime I make a change the page reloads which will log out the
+    //current user. This is getting annoying during testing so I'm writing this function to just automatically
+    //log in a user upon initial application load
+    this.getUser(new LoginAttempt("Capn01", "hello")).subscribe(
+      (response:User) => {
+        this.updateUser(response);
+      }
+    )
   }
 
   getUser(loginAttempt:LoginAttempt):Observable<User>{
@@ -25,9 +39,9 @@ export class CurrentUserService {
     return this.http.post(this.url + "login", loginAttempt) as Observable<User>;
   }
 
-  updateUser(updatedUser:User):void {
+  updateUser(updateUser:User):void {
     //updates the currentUser variable stored in the CurrentUserService
-    this.currentUser = updatedUser;
+    this.currentUser = updateUser;
   }
 
   removeUser():void {
@@ -38,6 +52,52 @@ export class CurrentUserService {
 
   createUser(user:User):Observable<User> {
     return this.http.post(this.url + "users", user) as Observable<User>;
+  }
+
+  updateUserDB(user:User):Observable<number> {
+    return this.http.put(this.url + "users", user) as Observable<number>;
+  }
+
+  logoutUser():Observable<number> {
+    //if there's currently a user logged in, log them out by making a call to the backend and removing their
+    //stored data in this service
+    let logoutSuccess = this.http.put(this.url + "login", this.currentUser) as Observable<number>;
+    this.removeUser();
+    return logoutSuccess;
+  }
+
+  giveCurrentUser():User {
+    //this functino is used to pass info on the current user to the components that use this service
+    return this.currentUser;
+  }
+
+  updateStat(statCategory:string, difficulty:number, correct:boolean):void {
+    for (let stat of this.currentUser.userStats) {
+      if (stat.categoryName == statCategory) {
+          if (difficulty == 0) {
+            stat.easiestAttempted += 1;
+            if (correct) stat.easiestCorrect += 1;
+          }
+          else if (difficulty == 1) {
+            stat.easyAttempted += 1;
+            if (correct) stat.easyCorrect += 1;
+          }
+          else if (difficulty == 2) {
+            stat.mediumAttempted += 1;
+            if (correct) stat.mediumCorrect += 1;
+          }
+          else if (difficulty == 3) {
+            stat.hardAttempted += 1;
+            if (correct) stat.hardCorrect += 1;
+          }
+          else {
+            stat.hardestAttempted += 1;
+            if (correct) stat.hardestCorrect += 1;
+          }
+
+        break; //only one of each category so we can break out of loop after updating it
+      }
+    }
   }
 
   //TODO: Add some more functions at some point which will allow the user to change some of their information

@@ -12,6 +12,7 @@ export class CategoryService {
 
   apiUrl:string = 'https://jservice.io/api/';
   backendUrl:string = 'http://localhost:8083/';
+  currentCategoryQuestions:Array<Question[]> = [];
   //backendUrl:string = 'http://35.174.167.115:7000/';
 
   constructor(private http:HttpClient) { }
@@ -81,7 +82,8 @@ export class CategoryService {
           //With the changes mentioned above this default case shouldn't happen, but we'll keep it for now
           default:
             //some of the questions in the API don't have a value assigned so we must skip these
-            console.log("found a question with no value");
+            //console.log("found a question with no value");
+            break;
         }
       }
     }

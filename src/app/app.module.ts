@@ -20,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { QmasterComponent } from './components/qmaster/qmaster.component';
+import { User } from './models/user';
 
 @NgModule({
   declarations: [

@@ -23,7 +23,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { QmasterComponent } from './components/qmaster/qmaster.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { User } from './models/user';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +53,8 @@ import { User } from './models/user';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

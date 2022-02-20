@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Answer } from 'src/app/models/answer.model';
 import { Category } from 'src/app/models/category';
 import { Question } from 'src/app/models/question';
+import { CategoryService } from 'src/app/services/category.service';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
@@ -55,7 +56,7 @@ export class SinglePlayerComponent implements OnInit {
 
   public givenAnswer:string = "Enter Answer Here"; 
 
-  constructor(private questionService:QuestionService) { }
+  constructor(private questionService:QuestionService, private categoryService:CategoryService) { }
 
   ngOnInit(): void {
     this.generateBoard(); 
@@ -135,7 +136,7 @@ export class SinglePlayerComponent implements OnInit {
       let x = Math.floor(Math.random() * this.popCategories.length); 
       console.log("x = " + x + " at " + i)
       if (i==0) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+        this.categoryService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
           this.category1 = category as Category; 
           console.log("category1:"); 
           console.log(this.category1);
@@ -147,7 +148,7 @@ export class SinglePlayerComponent implements OnInit {
         
       } 
       if (i==1) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+        this.categoryService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
           this.category2 = category as Category; 
           console.log("category2:"); 
           console.log(this.category2);
@@ -159,7 +160,7 @@ export class SinglePlayerComponent implements OnInit {
         
       }
       if (i==2) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+        this.categoryService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
           this.category3 = category as Category; 
           console.log("category3:"); 
           console.log(this.category3);
@@ -171,7 +172,7 @@ export class SinglePlayerComponent implements OnInit {
         
       }
       if (i==3) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+        this.categoryService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
           this.category4 = category as Category;
           console.log("category4:"); 
           console.log(this.category4); 
@@ -183,7 +184,7 @@ export class SinglePlayerComponent implements OnInit {
         
       }
       if (i==4) {
-        this.questionService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
+        this.categoryService.getQuestionsByCategory(this.popCategories[x]).subscribe((category:Category) => {
           this.category5 = category as Category; 
           console.log("category5:")
           console.log(this.category5);

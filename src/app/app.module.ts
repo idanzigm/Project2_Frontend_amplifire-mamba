@@ -39,7 +39,7 @@ import { User } from './models/user';
     GameModeComponent,
     PracticeModeComponent,
     NavbarComponent,
-    SinglePlayerComponent
+    SinglePlayerComponent,
     UpdateUserComponent,
     StatisticsComponent,
     QmasterComponent

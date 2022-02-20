@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+//import { Observable, tap } from 'rxjs';
+
+//import { randomInt } from 'crypto';
 import { Observable } from 'rxjs';
+
 import { AbridgedCategory } from '../models/abridged-category';
 import { Category } from '../models/category';
 import { Question } from '../models/question';
@@ -20,6 +25,9 @@ export class QuestionService {
     return this.http.get<Question[]>(this.apiUrl +  'random?count=10');
   }
 
+  getSingleQuestion(): Observable<Question[]>{
+    return this.http.get<Question[]>(this.apiUrl +  'random?count=1');
+  }
 
   /*
   getQuestionsByCategory(categoryNumber:number): Observable<Category>{
@@ -44,6 +52,7 @@ export class QuestionService {
   getMostCategories(): Observable<AbridgedCategory[]> {
     return this.http.get(this.backendUrl + 'mpcategories') as Observable<AbridgedCategory[]>;
   }
+
 */
 }
 

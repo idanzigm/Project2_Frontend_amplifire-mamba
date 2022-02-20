@@ -39,9 +39,9 @@ export class CurrentUserService {
     return this.http.post(this.url + "login", loginAttempt) as Observable<User>;
   }
 
-  updateUser(updatedUser:User):void {
+  updateUser(updateUser:User):void {
     //updates the currentUser variable stored in the CurrentUserService
-    this.currentUser = updatedUser;
+    this.currentUser = updateUser;
   }
 
   removeUser():void {
@@ -54,8 +54,8 @@ export class CurrentUserService {
     return this.http.post(this.url + "users", user) as Observable<User>;
   }
 
-  createUserDB(user:User):Observable<number> {
-    return this.http.put(this.url + "users", user) as Observable<number>
+  updateUserDB(user:User):Observable<number> {
+    return this.http.put(this.url + "users", user) as Observable<number>;
   }
 
   logoutUser():Observable<number> {

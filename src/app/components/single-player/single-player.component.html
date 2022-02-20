@@ -1,0 +1,83 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Player Mode</title>
+</head>
+<body>
+    <a mat-button routerLinkActive="true" routerLink="">exit</a>
+    <br> 
+    <div>
+        <table class = "col-sm-2">
+            <tr>
+                <th>{{category1.title}}</th>
+                <th>{{category2.title}}</th>
+                <th>{{category3.title}}</th>
+                <th>{{category4.title}}</th>
+                <th>{{category5.title}}</th>
+            </tr>
+            <tr>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c1question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c2question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c3question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c4question200)"></td>
+                <td><input type = "submit" value = "200" (click) = "displayPrompt(c5question200)"></td>
+            </tr>
+            <tr>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c1question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c2question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c3question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c4question400)"></td>
+                <td><input type = "submit" value = "400" (click) = "displayPrompt(c5question400)"></td>
+            </tr>
+            <tr>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c1question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c2question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c3question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c4question600)"></td>
+                <td><input type = "submit" value = "600" (click) = "displayPrompt(c5question600)"></td>
+            </tr>
+            <tr>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c1question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c2question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c3question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c4question800)"></td>
+                <td><input type = "submit" value = "800" (click) = "displayPrompt(c5question800)"></td>
+            </tr>
+            <tr>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c1question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c2question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c3question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c4question1000)"></td>
+                <td><input type = "submit" value = "1000" (click) = "displayPrompt(c5question1000)"></td>
+            </tr>
+        </table>
+    </div>
+    <div> 
+        <p>{{displayQuestion}}</p>
+        <p><label>Answer</label><input type="text" [(ngModel)]="givenAnswer" /></p>
+        <p><input type="button" value="Final Answer" (click)="storeAnswer()"/></p>
+    </div>
+    <div>
+        <span><input type="button" value="Generate" (click)="generateBoard()"/></span>
+        <span><input type="button" value="Score" (click)="score()"/></span> 
+    </div>
+<!--    <div *ngIf = "displayCheck == true">
+        <p>You Scored: {{displayScore}}</p>
+        <table >
+            <tr>
+                <th>Question ID</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Your Answer</th>
+            </tr>
+            <tr *ngFor = "let q of questionStore">
+                <td [ngStyle] = "ngStyle(q)">{{q.id}}</td>
+                <td [ngStyle] = "ngStyle(q)">{{q.question}}</td>
+                <td [ngStyle] = "ngStyle(q)">{{q.answer}}</td>
+                <td [ngStyle] = "ngStyle(q)">{{getGivenAnswer(q.id)}}</td>
+            </tr>
+        </table>
+    </div> -->
+</body>

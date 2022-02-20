@@ -17,4 +17,20 @@ export class Question {
         this.category = category;
         this.airdate = airdate;
     }
+
+    getValue() {
+        return this.value; 
+    }
+
+    getId() {
+        return this.id; 
+    }
+
+    getQuestion() {
+        return this.question; 
+    }
+
+    getAnswer() {
+        return this.answer; 
+    }
 }

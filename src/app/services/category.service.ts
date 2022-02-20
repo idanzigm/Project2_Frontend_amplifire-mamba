@@ -51,13 +51,14 @@ export class CategoryService {
       let currentQuestion: Question = catQuestions[i];
       let clue: string = currentQuestion.question;
       let value: number = currentQuestion.value;
+
       //Verifies that both the question and the value exist
       //Necessary because some clues/questions don't have a question and/or a value
-      if ((clue && value) && (clue != "" && value != 0)) {
+      if (clue && value) {
         //If the airdate year is earlier than 2001, the question's value is doubled
         //If we decide to implement some kind of functionality similar to double jeopardy, we can just write another conditional
         //and update the values as necessary
-        if (parseInt(currentQuestion.airdate.substring(5)) < 2001) {
+        if (parseInt(currentQuestion.airdate.substring(4)) < 2001) {
           currentQuestion.value *= 2;
           value *= 2;
         }

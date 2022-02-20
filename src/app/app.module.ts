@@ -14,6 +14,8 @@ import { GameModeComponent } from './components/game-mode/game-mode.component';
 import { PracticeModeComponent } from './components/practice-mode/practice-mode.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+
+import { TestBed } from '@angular/core/testing';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -50,4 +52,5 @@ import { User } from './models/user';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -47,7 +47,7 @@ export class SinglePlayerComponent implements OnInit {
   public questionStore:Question[] = []; 
   public answerStore:Answer[] = []; 
 
-  public displayQuestion:string = ""; 
+  public displayQuestion:string = "Display Question"; 
   public displayQuestionID:number = 0; 
   public displayAnswer:string = ""; 
   public displayScore:number = 0;
@@ -118,6 +118,7 @@ export class SinglePlayerComponent implements OnInit {
 
   generateBoard() : void {
     console.log("inside generateBoard"); 
+    this.displayQuestion = "Display Question"
     this.displayCheck = false; 
     this.displayScore = 0; 
     this.setEachCategoryAndQuestionStore(); 
@@ -199,32 +200,42 @@ export class SinglePlayerComponent implements OnInit {
   //============================================================================
 
   setQuestionStoreCategory1() : void {
-    let c1questions200 = []; 
-    c1questions200 = this.get200(this.category1.getClues()); 
+    console.log("inside setQuestionStoreCategory1"); 
+    
+    let c1questions:Question[] = new Array();
+    c1questions = this.category1.clues; 
+    console.log("c1qs: ");
+    console.log(c1questions); 
+
+    let c1questions200:Question[] = new Array(); 
+    c1questions200 = this.get200(c1questions); 
+    console.log("c1qs200: "); 
+    console.log(c1questions200); 
     let x:number = Math.floor(Math.random() * c1questions200.length); 
     this.c1question200 = c1questions200[x]; 
+    console.log("c1q200:" + this.c1question200); 
     this.questionStore.push(this.c1question200); 
 
-    let c1questions400 = []; 
-    c1questions400 = this.get400(this.category1.getClues()); 
+    let c1questions400:Question[] = new Array(); 
+    c1questions400 = this.get400(c1questions); 
     x = Math.floor(Math.random() * c1questions400.length); 
     this.c1question400 = c1questions400[x]; 
     this.questionStore.push(this.c1question400); 
 
-    let c1questions600 = []; 
-    c1questions600 = this.get600(this.category1.getClues()); 
+    let c1questions600:Question[] = new Array(); 
+    c1questions600 = this.get600(c1questions); 
     x = Math.floor(Math.random() * c1questions600.length); 
     this.c1question600 = c1questions600[x]; 
     this.questionStore.push(this.c1question600); 
 
-    let c1questions800 = []; 
-    c1questions800 = this.get800(this.category1.getClues()); 
+    let c1questions800:Question[] = new Array(); 
+    c1questions800 = this.get800(c1questions); 
     x = Math.floor(Math.random() * c1questions800.length); 
     this.c1question800 = c1questions800[x]; 
     this.questionStore.push(this.c1question800); 
 
-    let c1questions1000 = []; 
-    c1questions1000 = this.get1000(this.category1.getClues()); 
+    let c1questions1000:Question[] = new Array(); 
+    c1questions1000 = this.get1000(c1questions); 
     x = Math.floor(Math.random() * c1questions1000.length); 
     this.c1question1000 = c1questions1000[x]; 
     this.questionStore.push(this.c1question1000); 
@@ -233,32 +244,37 @@ export class SinglePlayerComponent implements OnInit {
 //============================================================================
 
   setQuestionStoreCategory2() : void {
-    let c2questions200 = []; 
-    c2questions200 = this.get200(this.category2.getClues()); 
+    let c2questions:Question[] = new Array();
+    c2questions = this.category2.clues; 
+    console.log("c1qs: ");
+    console.log(c2questions);
+    
+    let c2questions200:Question[] = new Array(); 
+    c2questions200 = this.get200(c2questions); 
     let x = Math.floor(Math.random() * c2questions200.length); 
     this.c2question200 = c2questions200[x]; 
     this.questionStore.push(this.c2question200);
 
-    let c2questions400 = []; 
-    c2questions400 = this.get400(this.category2.getClues()); 
+    let c2questions400:Question[] = new Array(); 
+    c2questions400 = this.get400(c2questions); 
     x = Math.floor(Math.random() * c2questions400.length); 
     this.c2question400 = c2questions400[x]; 
     this.questionStore.push(this.c2question400);
 
-    let c2questions600 = []; 
-    c2questions600 = this.get600(this.category2.getClues()); 
+    let c2questions600:Question[] = new Array(); 
+    c2questions600 = this.get600(c2questions); 
     x = Math.floor(Math.random() * c2questions600.length); 
     this.c2question600 = c2questions600[x]; 
     this.questionStore.push(this.c2question600);
 
-    let c2questions800 = []; 
-    c2questions800 = this.get800(this.category2.getClues()); 
+    let c2questions800:Question[] = new Array(); 
+    c2questions800 = this.get800(c2questions); 
     x = Math.floor(Math.random() * c2questions800.length); 
     this.c2question800 = c2questions800[x]; 
     this.questionStore.push(this.c2question800);
 
-    let c2questions1000 = []; 
-    c2questions1000 = this.get1000(this.category2.getClues()); 
+    let c2questions1000:Question[] = new Array(); 
+    c2questions1000 = this.get1000(c2questions); 
     x = Math.floor(Math.random() * c2questions1000.length); 
     this.c2question1000 = c2questions1000[x]; 
     this.questionStore.push(this.c2question1000);
@@ -267,31 +283,37 @@ export class SinglePlayerComponent implements OnInit {
 //============================================================================
 
   setQuestionStoreCategory3() : void {
-    let c3questions200 = []; 
-    c3questions200 = this.get200(this.category3.getClues()); 
+    let c3questions:Question[] = new Array();
+    c3questions = this.category3.clues; 
+    console.log("c1qs: ");
+    console.log(c3questions);
+    
+    let c3questions200:Question[] = new Array(); 
+    c3questions200 = this.get200(c3questions); 
     let x = Math.floor(Math.random() * c3questions200.length); 
     this.c3question200 = c3questions200[x]; 
     this.questionStore.push(this.c3question200);
 
-    let c3questions400 = [this.get400(this.category3.getClues())];  
+    let c3questions400:Question[] = new Array(); 
+    c3questions400 = this.get400(c3questions) 
     x = Math.floor(Math.random() * c3questions400.length); 
     this.c3question400 = c3questions400[x];
     this.questionStore.push(this.c3question400);
 
-    let c3questions600 = []; 
-    c3questions600 = this.get600(this.category3.getClues()); 
+    let c3questions600:Question[] = new Array(); 
+    c3questions600 = this.get600(c3questions); 
     x = Math.floor(Math.random() * c3questions600.length); 
     this.c3question600 = c3questions600[x];
     this.questionStore.push(this.c3question600);
 
-    let c3questions800 = []; 
-    c3questions800 = this.get800(this.category3.getClues()); 
+    let c3questions800:Question[] = new Array(); 
+    c3questions800 = this.get800(c3questions); 
     x = Math.floor(Math.random() * c3questions800.length); 
     this.c3question800 = c3questions800[x];
     this.questionStore.push(this.c3question800);
 
-    let c3questions1000 = []; 
-    c3questions1000 = this.get1000(this.category3.getClues());
+    let c3questions1000:Question[] = new Array(); 
+    c3questions1000 = this.get1000(c3questions);
     x = Math.floor(Math.random() * c3questions1000.length); 
     this.c3question1000 = c3questions1000[x];
     this.questionStore.push(this.c3question1000);
@@ -300,32 +322,37 @@ export class SinglePlayerComponent implements OnInit {
 //============================================================================
 
   setQuestionStoreCategory4() : void {
-    let c4questions200 = []; 
-    c4questions200 = this.get200(this.category4.getClues()); 
+    let c4questions:Question[] = new Array();
+    c4questions = this.category4.clues; 
+    console.log("c1qs: ");
+    console.log(c4questions);
+    
+    let c4questions200:Question[] = new Array(); 
+    c4questions200 = this.get200(c4questions); 
     let x = Math.floor(Math.random() * c4questions200.length); 
     this.c4question200 = c4questions200[x];
     this.questionStore.push(this.c4question200);
 
-    let c4questions400 = []; 
-    c4questions400 = this.get400(this.category4.getClues()); 
+    let c4questions400:Question[] = new Array(); 
+    c4questions400 = this.get400(c4questions); 
     x = Math.floor(Math.random() * c4questions400.length); 
     this.c4question400 = c4questions400[x];
     this.questionStore.push(this.c4question400);
 
-    let c4questions600 = []; 
-    c4questions600 = this.get600(this.category4.getClues()); 
+    let c4questions600:Question[] = new Array(); 
+    c4questions600 = this.get600(c4questions); 
     x = Math.floor(Math.random() * c4questions600.length); 
     this.c4question600 = c4questions600[x];
     this.questionStore.push(this.c4question600);
 
-    let c4questions800 = []; 
-    c4questions800 = this.get800(this.category4.getClues()); 
+    let c4questions800:Question[] = new Array(); 
+    c4questions800 = this.get800(c4questions); 
     x = Math.floor(Math.random() * c4questions800.length); 
     this.c4question800 = c4questions800[x];
     this.questionStore.push(this.c4question800);
 
-    let c4questions1000 = []; 
-    c4questions1000 = this.get1000(this.category4.getClues());
+    let c4questions1000:Question[] = new Array(); 
+    c4questions1000 = this.get1000(c4questions);
     x = Math.floor(Math.random() * c4questions1000.length); 
     this.c4question1000 = c4questions1000[x];
     this.questionStore.push(this.c4question1000);
@@ -334,32 +361,32 @@ export class SinglePlayerComponent implements OnInit {
 //============================================================================
 
   setQuestionStoreCategory5() : void {
-    let c5questions200 = []; 
-    c5questions200 = this.get200(this.category5.getClues()); 
+    let c5questions200:Question[] = new Array(); 
+    c5questions200 = this.get200(this.category5.clues); 
     let x = Math.floor(Math.random() * c5questions200.length); 
     this.c5question200 = c5questions200[x];
     this.questionStore.push(this.c5question200);
 
-    let c5questions400 = []; 
-    c5questions400 = this.get400(this.category5.getClues()); 
+    let c5questions400:Question[] = new Array(); 
+    c5questions400 = this.get400(this.category5.clues); 
     x = Math.floor(Math.random() * c5questions400.length); 
     this.c5question400 = c5questions400[x];
     this.questionStore.push(this.c5question400);
 
-    let c5questions600 = []; 
-    c5questions600 = this.get600(this.category5.getClues()); 
+    let c5questions600:Question[] = new Array(); 
+    c5questions600 = this.get600(this.category5.clues); 
     x = Math.floor(Math.random() * c5questions600.length); 
     this.c5question600 = c5questions600[x];
     this.questionStore.push(this.c5question600);
 
-    let c5questions800 = []; 
-    c5questions800 = this.get800(this.category5.getClues()); 
+    let c5questions800:Question[] = new Array(); 
+    c5questions800 = this.get800(this.category5.clues); 
     x = Math.floor(Math.random() * c5questions800.length); 
     this.c5question800 = c5questions800[x];
     this.questionStore.push(this.c5question800);
 
-    let c5questions1000 = []; 
-    c5questions1000 = this.get1000(this.category5.getClues()); 
+    let c5questions1000:Question[] = new Array(); 
+    c5questions1000 = this.get1000(this.category5.clues); 
     x = Math.floor(Math.random() * c5questions1000.length); 
     this.c5question1000 = c5questions1000[x];
     this.questionStore.push(this.c5question1000);
@@ -368,9 +395,9 @@ export class SinglePlayerComponent implements OnInit {
 //============================================================================
 
   get200(array:Question[]) : Question[] { 
-    let questions200 = []; 
+    let questions200:Question[] = new Array();; 
     for (let q of array) {
-      if (q.getValue() == 200){
+      if (q.value == 100){
         questions200.push(q); 
       }
     }
@@ -378,9 +405,9 @@ export class SinglePlayerComponent implements OnInit {
   }
 
   get400(array:Question[]) : Question[] { 
-    let questions400 = []; 
+    let questions400:Question[] = new Array();; 
     for (let q of array) {
-      if (q.getValue() == 400){
+      if (q.value == 200){
         questions400.push(q); 
       }
     }
@@ -388,9 +415,9 @@ export class SinglePlayerComponent implements OnInit {
   }
    
   get600(array:Question[]) : Question[] { 
-    let questions600 = []; 
+    let questions600:Question[] = new Array();; 
     for (let q of array) {
-      if (q.getValue() == 600){
+      if (q.value == 300){
         questions600.push(q); 
       }
     }
@@ -398,9 +425,9 @@ export class SinglePlayerComponent implements OnInit {
   }
   
   get800(array:Question[]) : Question[] { 
-    let questions800 = []; 
+    let questions800:Question[] = new Array();; 
     for (let q of array) {
-      if (q.getValue() == 800){
+      if (q.value == 400){
         questions800.push(q); 
       }
     }
@@ -408,9 +435,9 @@ export class SinglePlayerComponent implements OnInit {
   }
 
   get1000(array:Question[]) : Question[] { 
-    let questions1000 = []; 
+    let questions1000:Question[] = new Array();; 
     for (let q of array) {
-      if (q.getValue() == 1000){
+      if (q.value == 500){
         questions1000.push(q); 
       }
     }
@@ -421,14 +448,15 @@ export class SinglePlayerComponent implements OnInit {
   //============================================================================
 
   displayPrompt(q:Question)  {
-     this.displayQuestion = q.getQuestion(); 
-     this.displayQuestionID = q.getId(); 
+     this.displayQuestion = q.question; 
+     this.displayQuestionID = q.id; 
   }
 
   storeAnswer() : void {
     let a:Answer = new Answer(this.displayQuestionID, this.givenAnswer); 
     this.answerStore.push(a); 
     this.givenAnswer = "Enter Answer Here"; 
+    console.log(this.answerStore); 
   }
 
 //=======================================================================================
@@ -437,12 +465,12 @@ export class SinglePlayerComponent implements OnInit {
   score() : void {
     let score:number = 0; 
     for (let a of this.answerStore) {
-      let x:number; 
-      x = a.getId();
+      let x:number = 0; 
+      x = a.id;
       for (let q of this.questionStore)  {
-        if (q.getId() == x) {
-          if (a.getGivenAnswer() == q.getAnswer()) {
-            score = score + q.getValue(); 
+        if (q.id == x) {
+          if (a.givenAnswer == q.answer) {
+            score = score + (q.value * 2); 
           }
         }
       }
@@ -452,21 +480,21 @@ export class SinglePlayerComponent implements OnInit {
   }
 
   getGivenAnswer(id:number) : string{
-    let ga:string; 
+    let ga:string = ""; 
     for (let a of this.answerStore) {
-      if (id == a.getId()) {
-        ga = a.getGivenAnswer(); 
+      if (id == a.id) {
+        ga = a.givenAnswer; 
         return ga; 
       } else {
         ga = ""; 
       }
       return ga; 
     }
-    return ""; 
+    return ga; 
   }
 
   ngStyle(q:Question) {
-    if (this.getGivenAnswer(q.getId()) == q.getAnswer()) {
+    if (this.getGivenAnswer(q.id) == q.answer) {
       return "background-color=green"
     } else {
       return "background-color=red"

@@ -11,11 +11,11 @@
     <div>
         <table class = "col-sm-2">
             <tr>
-                <th [category] = "category1">{{category1.getTitle()}}</th>
-                <th [category] = "category2">{{category2.getTitle()}}</th>
-                <th [category] = "category3">{{category3.getTitle()}}</th>
-                <th [category] = "category4">{{category4.getTitle()}}</th>
-                <th [category] = "category5">{{category5.getTitle()}}</th>
+                <th>{{category1.title}}</th>
+                <th>{{category2.title}}</th>
+                <th>{{category3.title}}</th>
+                <th>{{category4.title}}</th>
+                <th>{{category5.title}}</th>
             </tr>
             <tr>
                 <td><input type = "submit" value = "200" (click) = "displayPrompt(c1question200)"></td>
@@ -54,18 +54,16 @@
             </tr>
         </table>
     </div>
-    <div>
+    <div> 
         <p>{{displayQuestion}}</p>
-        <form id="Aswer">
-        <p><label>Answer</label><input type="text" [(ngModel)] = “givenAnswer” ></p>
-        <p><input type="submit" (click) = "storeAnswer({{displayQuestionID}})"></p>
-        </form>
+        <p><label>Answer</label><input type="text" [(ngModel)]="givenAnswer" /></p>
+        <p><input type="button" value="Final Answer" (click)="storeAnswer()"/></p>
     </div>
     <div>
-        <span><input type = "submit" value = "Generate" (click) = "generateBoard()"></span>
-        <span><input type = "submit" value = "Score" (click)="score()"></span> 
+        <span><input type="button" value="Generate" (click)="generateBoard()"/></span>
+        <span><input type="button" value="Score" (click)="score()"/></span> 
     </div>
-    <div *ngIf displayCheck="true">
+<!--    <div *ngIf = "displayCheck == true">
         <p>You Scored: {{displayScore}}</p>
         <table >
             <tr>
@@ -74,13 +72,12 @@
                 <th>Answer</th>
                 <th>Your Answer</th>
             </tr>
-            <tr *ngFor = "getQuestionStore()">
-                <td [ngStyle] = "ngStyle(question[0])">{{question[0].getId()}}</td>
-                <td [ngStyle] = "ngStyle(question[0])">{{question[0].getQuestion()}}</td>
-                <td [ngStyle] = "ngStyle(question[0])">{{question[0].getAnswer()}}</td>
-                <td [ngStyle] = "ngStyle(question[0])">{{getGivenAnswer(question[0].getId())}}</td>
+            <tr *ngFor = "let q of questionStore">
+                <td [ngStyle] = "ngStyle(q)">{{q.id}}</td>
+                <td [ngStyle] = "ngStyle(q)">{{q.question}}</td>
+                <td [ngStyle] = "ngStyle(q)">{{q.answer}}</td>
+                <td [ngStyle] = "ngStyle(q)">{{getGivenAnswer(q.id)}}</td>
             </tr>
         </table>
-    </div>
+    </div> -->
 </body>
-</html>

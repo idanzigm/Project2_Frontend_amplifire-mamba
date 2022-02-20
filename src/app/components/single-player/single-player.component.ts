@@ -54,7 +54,7 @@ export class SinglePlayerComponent implements OnInit {
   public displayScore:number = 0;
   public displayCheck:boolean = false; 
 
-  public givenAnswer:string = ""; 
+  public givenAnswer:string = "Enter Answer Here"; 
 
   constructor(private questionService:QuestionService) { }
 
@@ -108,6 +108,10 @@ export class SinglePlayerComponent implements OnInit {
 
   setDisplayAnswer(a:string) {
     this.displayAnswer = a; 
+  }
+
+  getQuestionStore() : Question[] {
+    return this.questionStore; 
   }
 
   //============================================================================
@@ -380,9 +384,10 @@ export class SinglePlayerComponent implements OnInit {
      this.displayQuestionID = q.getId(); 
   }
 
-  storeAnswer(id:number) : void {
-    let a:Answer = new Answer(id, this.givenAnswer); 
+  storeAnswer() : void {
+    let a:Answer = new Answer(this.displayQuestionID, this.givenAnswer); 
     this.answerStore.push(a); 
+    this.givenAnswer = "Enter Answer Here"; 
   }
 
 //=======================================================================================

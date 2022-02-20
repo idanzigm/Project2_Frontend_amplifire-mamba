@@ -116,8 +116,8 @@ export class PracticeModeComponent implements OnInit {
       alert("Sorry incorrect, please try again.");
     }
     //update statistics for user on incorrect answer
-    //TODO: This functionality should only be in main game mode, but I'm putting it here now to test
-    this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, correct);
+    //no longer update stats in practice mode
+    //this.currentUserService.updateStat(this.displayCategory, this.currentDifficulty, correct);
   }
 
   revealAnswer():void {

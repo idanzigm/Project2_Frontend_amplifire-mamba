@@ -33,6 +33,23 @@ export class TestComponent implements OnInit {
     );
   }
 
+  getRandomQuestion2():void {
+    this.quest.getSingleQuestion().subscribe(response => 
+      {
+        this.questions = response.map(item => 
+        {
+          return new Question( 
+              item.id,
+              item.question,
+              item.answer,
+              item.value,
+              item.category,
+              item.airdate
+          );
+        });
+      });
+  }
+
   getCategoryQuestions(cat:number):void {
     this.continue = false;
     this.cat.getQuestionsByCategory(cat).subscribe(

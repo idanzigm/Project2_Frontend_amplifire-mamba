@@ -22,6 +22,9 @@ export class Category {
         return this.clues; 
     }
 
+    getTitle() : string {
+        return this.title; 
+    }
     
 
 }

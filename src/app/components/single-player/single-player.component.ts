@@ -134,27 +134,27 @@ export class SinglePlayerComponent implements OnInit {
     for (let i =0; i<5; i++) {
       let x = Math.floor(Math.random() * this.popCategories.length); 
       if (i=0) {
-        this.questionService.getQuestionsByCategory(this.popCategories[i].getId()).subscribe((category:Category) => {
+        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
           this.category1 = category as Category
         })
       } 
       if (i=1) {
-        this.questionService.getQuestionsByCategory(this.popCategories[i].getId()).subscribe((category:Category) => {
+        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
           this.category2 = category as Category
         })
       }
       if (i=2) {
-        this.questionService.getQuestionsByCategory(this.popCategories[i].getId()).subscribe((category:Category) => {
+        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
           this.category3 = category as Category
         })
       }
       if (i=3) {
-        this.questionService.getQuestionsByCategory(this.popCategories[i].getId()).subscribe((category:Category) => {
+        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
           this.category4 = category as Category
         })
       }
       if (i=4) {
-        this.questionService.getQuestionsByCategory(this.popCategories[i].getId()).subscribe((category:Category) => {
+        this.questionService.getQuestionsByCategory(this.popCategories[x].getId()).subscribe((category:Category) => {
           this.category5 = category as Category
         })
       }
@@ -426,9 +426,9 @@ export class SinglePlayerComponent implements OnInit {
 
   ngStyle(q:Question) {
     if (this.getGivenAnswer(q.getId()) == q.getAnswer()) {
-      return "green"
+      return "background-color=green"
     } else {
-      return "red"
+      return "background-color=red"
     }
   }
 

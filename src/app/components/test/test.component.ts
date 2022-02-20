@@ -5,6 +5,8 @@ import { QuestionService } from 'src/app/services/question.service';
 import { AbridgedCategory } from 'src/app/models/abridged-category';
 import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
+import { CurrentGameService } from 'src/app/services/current-game.service';
+import { AnswerCompareService } from 'src/app/services/answer-compare.service';
 
 @Component({
   selector: 'app-test',
@@ -19,10 +21,28 @@ export class TestComponent implements OnInit {
   continue:boolean = true;
   maxQuestionsLimit:number = 75; //dictates the maximum size of the 'mostQuestions' array
   paginationAmount:number = 100; //100 is the maximum for pagination
+  category1:string = "";
+  category2:string = "";
+  category3:string = "";
+  category4:string = "";
+  category5:string = "";
+  category6:string = "";
+  currentQuestionPrompt:string = "";
+  currentAnswerPrompt:string = "";
+  currentAnswer:string = "";
+  easiestValue:string = "";
+  easyValue:string = "";
+  mediumValue:string = "";
+  hardValue:string = "";
+  hardestValue:string = "";
+  currentClickedButton:string = "";
+  potentialPointValue:number = 0;
+  totalPoints:number = 0;
 
-  constructor(private quest:QuestionService, private cat:CategoryService) { }
+  constructor(private quest:QuestionService, private cat:CategoryService, private currentGame:CurrentGameService, private answerService:AnswerCompareService) { }
 
   ngOnInit(): void {
+    this.currentGame.newGame();
   }
 
   getRandomQuestion():void {
@@ -134,5 +154,85 @@ export class TestComponent implements OnInit {
     }
   }
 
+  startNewGame():void {
+    this.category1 = this.currentGame.categories[0].title;
+    this.category2 = this.currentGame.categories[1].title;
+    this.category3 = this.currentGame.categories[2].title;
+    this.category4 = this.currentGame.categories[3].title;
+    this.category5 = this.currentGame.categories[4].title;
+    this.category6 = this.currentGame.categories[5].title;
+
+    this.easiestValue = "100";
+    this.easyValue = "200";
+    this.mediumValue = "300";
+    this.hardValue = "400";
+    this.hardestValue = "500";
+  }
+
+  loadIndividualQuestion(category:number, question:number, clickedButton:string):void {
+    //clicking on one of the question buttons will cause the question text to load in the prompt section
+    this.currentQuestionPrompt = this.currentGame.questions[category][question].question;
+    this.currentAnswer = this.currentGame.questions[category][question].answer;
+
+    this.currentClickedButton = clickedButton;
+    console.log(this.currentClickedButton);
+
+    //load up the potential point value
+    this.potentialPointValue = question * 100 + 100;
+    console.log(this.potentialPointValue);
+
+    //unhide question elements
+    let questionHeader = document.getElementById("question-header");
+    if (questionHeader != null) questionHeader.hidden = false;
+
+    let questionPrompt = document.getElementById("question-prompt");
+    if (questionPrompt != null) questionPrompt.hidden = false;
+
+    let answerHeader = document.getElementById("answer-header");
+    if (answerHeader != null) answerHeader.hidden = false;
+
+    let answerPrompt = document.getElementById("answer-prompt");
+    if (answerPrompt != null) answerPrompt.hidden = false;
+
+    let submitAnswer = document.getElementById("submit-answer");
+    if (submitAnswer != null) submitAnswer.hidden = false;
+  }
+
+  submitAnswer() {
+    //add answer comparison function here
+    let correct:boolean = this.answerService.compareAnswers(this.currentAnswerPrompt, this.currentAnswer);
+    let currentButton = document.getElementById(this.currentClickedButton);
+    this.currentAnswerPrompt = ""; //reset answer text box
+
+
+    if (correct) {
+      //add to current point total
+      this.currentGame.currentPoints += this.potentialPointValue;
+      this.totalPoints = this.currentGame.currentPoints;
+
+      //change color of clicked answer button to green and remove click functionality
+      if (currentButton != null) currentButton.className = "btn btn-success navbar-btn"
+    }
+    else {
+      //change color of clicked answer button to red and remove click functionality
+      if (currentButton != null) currentButton.className = "btn btn-danger navbar-btn"
+    }
+
+    //set current question elements to hidden
+    let questionHeader = document.getElementById("question-header");
+    if (questionHeader != null) questionHeader.hidden = true;
+
+    let questionPrompt = document.getElementById("question-prompt");
+    if (questionPrompt != null) questionPrompt.hidden = true;
+
+    let answerHeader = document.getElementById("answer-header");
+    if (answerHeader != null) answerHeader.hidden = true;
+
+    let answerPrompt = document.getElementById("answer-prompt");
+    if (answerPrompt != null) answerPrompt.hidden = true;
+
+    let submitAnswer = document.getElementById("submit-answer");
+    if (submitAnswer != null) submitAnswer.hidden = true;
+  }
 }
 

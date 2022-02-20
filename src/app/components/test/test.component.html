@@ -1,4 +1,4 @@
-<button (click)="gMPC()" class="btn btn-secondary">Find most populous categories</button>
+<!--<button (click)="gMPC()" class="btn btn-secondary">Find most populous categories</button>
 <br>
 <small>*note - it takes roughly 10 seconds to poll the entire jService api so be patient! </small><br>
 <small>To see more categories change the "maxQuestionsLimit" variable in the .TS page </small>
@@ -56,4 +56,140 @@
             <td>{{mq.clues_count}}</td>
         </tr>
     </tbody>
-</table>
+</table>-->
+
+<!--<div class="container-fluid" style="background-color: #eee; text-align: center;">
+    <br>
+    <br>
+    <div id="category-names" style="display:inline; min-height: 60px;">
+        <button id="cat-1" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="cat-2" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="cat-3" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="cat-4" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="cat-5" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="cat-6" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+    </div>
+    <br>
+    <div id="easiest-questions" style="display:inline; min-height: 60px;">
+        <button id="easiest-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easiest-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easiest-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easiest-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easiest-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easiest-6" class="btn btn-success navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+    </div>
+    <br>
+    <div id="easy-questions" style="display:inline; min-height: 60px;">
+        <button id="easy-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easy-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easy-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easy-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easy-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="easy-6" class="btn btn-success navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+    </div>
+    <br>
+    <div id="medium-questions" style="display:inline; min-height: 60px;">
+        <button id="medium-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="medium-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="medium-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="medium-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="medium-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="medium-6" class="btn btn-success navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+    </div>
+    <br>
+    <div id="hard-questions" style="display:inline; min-height: 60px;">
+        <button id="hard-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hard-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hard-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hard-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hard-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hard-6" class="btn btn-success navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+    </div>
+    <br>
+    <div id="hardest-questions" style="display:inline; min-height: 60px;">
+        <button id="hardest-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hardest-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hardest-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hardest-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hardest-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+        <button id="hardest-6" class="btn btn-success navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;"></button>
+    </div>
+</div>-->
+
+<br>
+<button id="new-game" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "startNewGame()">Start new Game</button>
+<p style="margin-left:10px;">CURRENT SCORE: {{totalPoints}}</p>
+<br>
+<div class="container-fluid" style="text-align:center">
+    <div id="categories" class="row flex-row flex-nowrap" style="text-align:center">
+        <div class="col-12">
+            <button id="cat-1" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category1}}</button>
+            <button id="cat-2" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category2}}</button>
+            <button id="cat-3" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category3}}</button>
+            <button id="cat-4" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category4}}</button>
+            <button id="cat-5" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category5}}</button>
+            <button id="cat-6" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category6}}</button>
+        </div>
+    </div>
+    <div id="easiest-questions" class="row flex-row flex-nowrap">
+        <div class="col-12">
+            <button id="easiest-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(0, 0, 'easiest-1')">{{easiestValue}}</button>
+            <button id="easiest-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(1, 0, 'easiest-2')">{{easiestValue}}</button>
+            <button id="easiest-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(2, 0, 'easiest-3')">{{easiestValue}}</button>
+            <button id="easiest-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(3, 0, 'easiest-4')">{{easiestValue}}</button>
+            <button id="easiest-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(4, 0, 'easiest-5')">{{easiestValue}}</button>
+            <button id="easiest-6" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(5, 0, 'easiest-6')">{{easiestValue}}</button>
+        </div>
+    </div>
+    <div id="easy-questions" class="row flex-row flex-nowrap">
+        <div class="col-12">
+            <button id="easy-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(0, 1, 'easy-1')">{{easyValue}}</button>
+            <button id="easy-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(1, 1, 'easy-2')">{{easyValue}}</button>
+            <button id="easy-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(2, 1, 'easy-3')">{{easyValue}}</button>
+            <button id="easy-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(3, 1, 'easy-4')">{{easyValue}}</button>
+            <button id="easy-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(4, 1, 'easy-5')">{{easyValue}}</button>
+            <button id="easy-6" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(5, 1, 'easy-6')">{{easyValue}}</button>
+        </div>
+    </div>
+    <div id="medium-questions" class="row flex-row flex-nowrap">
+        <div class="col-12">
+            <button id="medium-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(1, 2, 'medium-1')">{{mediumValue}}</button>
+            <button id="medium-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(0, 2, 'medium-2')">{{mediumValue}}</button>
+            <button id="medium-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(2, 2, 'medium-3')">{{mediumValue}}</button>
+            <button id="medium-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(3, 2, 'medium-4')">{{mediumValue}}</button>
+            <button id="medium-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(4, 2, 'medium-5')">{{mediumValue}}</button>
+            <button id="medium-6" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(5, 2, 'medium-6')">{{mediumValue}}</button>
+        </div>
+    </div>
+    <div id="hard-questions" class="row flex-row flex-nowrap">
+        <div class="col-12">
+            <button id="hard-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(1, 3, 'hard-1')">{{hardValue}}</button>
+            <button id="hard-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(2, 3, 'hard-2')">{{hardValue}}</button>
+            <button id="hard-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(0, 3, 'hard-3')">{{hardValue}}</button>
+            <button id="hard-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(3, 3, 'hard-4')">{{hardValue}}</button>
+            <button id="hard-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(4, 3, 'hard-5')">{{hardValue}}</button>
+            <button id="hard-6" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(5, 3, 'hard-6')">{{hardValue}}</button>
+        </div>
+    </div>
+    <div id="hardest-questions" lass="row flex-row flex-nowrap">
+        <div class="col-12">
+            <button id="hardest-1" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(0, 4, 'hardest-1')">{{hardestValue}}</button>
+            <button id="hardest-2" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(1, 4, 'hardest-2')">{{hardestValue}}</button>
+            <button id="hardest-3" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(2, 4, 'hardest-3')">{{hardestValue}}</button>
+            <button id="hardest-4" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(3, 4, 'hardest-4')">{{hardestValue}}</button>
+            <button id="hardest-5" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(4, 4, 'hardest-5')">{{hardestValue}}</button>
+            <button id="hardest-6" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click)="loadIndividualQuestion(5, 4, 'hardest-6')">{{hardestValue}}</button>
+        </div>
+    </div>
+
+    <h3 id="question-header" hidden>Selected Question:</h3>
+    <p id="question-prompt" hidden style="border:1px; border-color:black; border-style:solid; max-width: 300px; min-height: 50px; border-radius: 15px; padding: 5px; margin:auto">{{currentQuestionPrompt}}</p>
+    
+    <br>
+    <br>
+    
+    <h3 id="answer-header" hidden>Answer:</h3>
+    <input id="answer-prompt" type="text" [(ngModel)] = "currentAnswerPrompt" style="min-width:500px;" hidden>
+    <button hidden id="submit-answer" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "submitAnswer()">Submit Answer</button>
+
+</div>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-update-user',
@@ -9,7 +11,6 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./update-user.component.css']
 })
 export class UpdateUserComponent implements OnInit {
-
 
   // currentUserData:User = JSON.parse(this.currentUserData)
   user:User;

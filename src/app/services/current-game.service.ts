@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AbridgedCategory } from '../models/abridged-category';
 import { Category } from '../models/category';
+import { HighScore } from '../models/high-score';
 import { Question } from '../models/question';
 import { CategoryService } from './category.service';
+import { CurrentUserService } from './current-user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,21 @@ export class CurrentGameService {
   categories:AbridgedCategory[] = [];
   questions:Question[][] = [[], [], [], [], [], []];
   currentPoints:number = 0;
+  highScoreTracker:HighScore = new HighScore(0, "", 0);
 
-  constructor(private categoryService:CategoryService) {}
+  constructor(private categoryService:CategoryService, private currentUserService:CurrentUserService) {}
 
   newGame():void {
     //clear out the current category and questions arrays
     this.categories = [];
     this.questions = [[], [], [], [], [], []];
     this.currentPoints = 0;
+    this.highScoreTracker = new HighScore(0, "", 0);
+
+    //set the start time for the game
+    let startTime = new Date();
+    this.highScoreTracker.gameTime = this.highScoreTracker.convertDateToString(startTime); //use helper function in class for formatting
+    console.log(this.highScoreTracker);
 
     //when a new game is started we select 5 random categories, and then select 5 random questions from within that category
     //(although the questions must by of difficulty 100 - 500)
@@ -69,6 +78,10 @@ export class CurrentGameService {
   }
 
   endGame():void {
-
+    //when the game is over we need to append the current high score to the current user's high score to make sure it gets saved
+    this.highScoreTracker.score = this.currentPoints;
+    console.log(this.highScoreTracker);
+    console.log(this.currentUserService.currentUser);
+    this.currentUserService.addHighScore(this.highScoreTracker);
   }
 }

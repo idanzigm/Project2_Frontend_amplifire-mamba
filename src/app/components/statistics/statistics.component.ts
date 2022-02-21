@@ -10,7 +10,7 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 })
 export class StatisticsComponent implements OnInit {
 
-  currentUser:User = new User(0, "", "", "", "", "", []);
+  currentUser:User = new User(0, "", "", "", "", "", [], []);
   constructor(private currentUserService:CurrentUserService) { }
 
   ngOnInit(): void {

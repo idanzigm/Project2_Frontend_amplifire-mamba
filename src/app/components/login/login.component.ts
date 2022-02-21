@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         
 
         //redirect to the main page
+        console.log(this.currentUserService.giveCurrentUser());
         this.router.navigateByUrl("");
       },
       error:()=>{

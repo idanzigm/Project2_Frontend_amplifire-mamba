@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
     }
     else {
       //first create a new user object
-      let user:User = new User(0, this.username, this.password, this.email, this.firstName, "", []);
+      let user:User = new User(0, this.username, this.password, this.email, this.firstName, "", [], []);
 
       //we only have a single input box for name. Need a little function to split up first name and last name.
       //if no last name was given the field will be left blank (last name can be blank in the database but firstname can't)

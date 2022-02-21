@@ -117,7 +117,8 @@
 </div>-->
 
 <br>
-<button id="new-game" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "startNewGame()">Start new Game</button>
+<button id="new-game" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "startNewGame()">Start New Game</button>
+<button hidden id="end-game" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "stopCurrentGame()">Stop Current Game</button>
 <p style="margin-left:10px;">CURRENT SCORE: {{totalPoints}}</p>
 <br>
 <div class="container-fluid" style="text-align:center">

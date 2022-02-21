@@ -170,6 +170,12 @@ export class TestComponent implements OnInit {
     this.mediumValue = "300";
     this.hardValue = "400";
     this.hardestValue = "500";
+
+    let startButton = document.getElementById("new-game");
+    if (startButton != null) startButton.hidden = true;
+
+    let endButton = document.getElementById("end-game");
+    if (endButton != null) endButton.hidden = false;
   }
 
   loadIndividualQuestion(category:number, question:number, clickedButton:string):void {
@@ -242,6 +248,29 @@ export class TestComponent implements OnInit {
 
     let submitAnswer = document.getElementById("submit-answer");
     if (submitAnswer != null) submitAnswer.hidden = true;
+  }
+
+  stopCurrentGame():void {
+    this.category1 = "";
+    this.category2 = "";
+    this.category3 = "";
+    this.category4 = "";
+    this.category5 = "";
+    this.category6 = "";
+
+    this.easiestValue = "";
+    this.easyValue = "";
+    this.mediumValue = "";
+    this.hardValue = "";
+    this.hardestValue = "";
+
+    let startButton = document.getElementById("new-game");
+    if (startButton != null) startButton.hidden = false;
+
+    let endButton = document.getElementById("end-game");
+    if (endButton != null) endButton.hidden = true;
+
+    this.currentGame.endGame();
   }
 }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { LoginAttempt } from '../models/login-attempt';
 import { Observable } from 'rxjs';
+import { HighScore } from '../models/high-score';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,11 @@ export class CurrentUserService {
   //this service will hold data about the currently signed in user and will be able to be accessed from 
   //the necessary components
   currentUser:User;
-  //url:string = "http://localhost:8083/";
-  url:string = 'http://35.174.167.115:7000/';
+  url:string = "http://localhost:8083/";
+  //url:string = 'http://35.174.167.115:7000/';
 
   constructor(private http:HttpClient) { 
-    this.currentUser  = new User(0, "", "", "", "", "", []); //starts off as a blank user upon instantiation
-    
+    this.currentUser  = new User(0, "", "", "", "", "", [], []); //starts off as a blank user upon instantiation
   }
 
   loginForTesting() {
@@ -34,6 +34,10 @@ export class CurrentUserService {
     )
   }
 
+  addHighScore(newScore:HighScore):void {
+    this.currentUser.userHighScores.push(newScore);
+  }
+
   getUser(loginAttempt:LoginAttempt):Observable<User>{
     //takes a login attempt returns the user info stored in the database if the
     //username exists and the password matches
@@ -48,7 +52,7 @@ export class CurrentUserService {
   removeUser():void {
     //this function is used when logging out. It erases cached information about the user that was previously
     //logged in
-    this.currentUser  = new User(0, "", "", "", "", "", []);
+    this.currentUser  = new User(0, "", "", "", "", "", [], []);
   }
 
   createUser(user:User):Observable<User> {

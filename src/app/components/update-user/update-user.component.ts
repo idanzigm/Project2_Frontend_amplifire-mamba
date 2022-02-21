@@ -22,7 +22,7 @@ export class UpdateUserComponent implements OnInit {
   password: string = "";
 
   constructor(private currentUserService:CurrentUserService, private router:Router) {
-    this.user = new User(0, "", "", "", "", "", []);
+    this.user = new User(0, "", "", "", "", "", [], []);
     // this.username = this.currentUserService.
    }
 

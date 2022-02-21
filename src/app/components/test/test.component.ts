@@ -8,6 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CurrentGameService } from 'src/app/services/current-game.service';
 import { AnswerCompareService } from 'src/app/services/answer-compare.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -42,7 +43,8 @@ export class TestComponent implements OnInit {
   potentialPointValue:number = 0;
   totalPoints:number = 0;
 
-  constructor(private quest:QuestionService, private cat:CategoryService, private currentGame:CurrentGameService, private answerService:AnswerCompareService, private currentUserService:CurrentUserService) { }
+  constructor(private quest:QuestionService, private cat:CategoryService, private currentGame:CurrentGameService, private answerService:AnswerCompareService, private currentUserService:CurrentUserService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.currentGame.newGame();
@@ -251,26 +253,10 @@ export class TestComponent implements OnInit {
   }
 
   stopCurrentGame():void {
-    this.category1 = "";
-    this.category2 = "";
-    this.category3 = "";
-    this.category4 = "";
-    this.category5 = "";
-    this.category6 = "";
-
-    this.easiestValue = "";
-    this.easyValue = "";
-    this.mediumValue = "";
-    this.hardValue = "";
-    this.hardestValue = "";
-
-    let startButton = document.getElementById("new-game");
-    if (startButton != null) startButton.hidden = false;
-
-    let endButton = document.getElementById("end-game");
-    if (endButton != null) endButton.hidden = true;
-
     this.currentGame.endGame();
+
+    //redirect to the main page after a game ends
+    this.router.navigateByUrl("");
   }
 }
 

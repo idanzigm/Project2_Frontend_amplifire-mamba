@@ -16,22 +16,48 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     //need to put the scores in numeric order
 
-    let tempScores:HighScore[] = [];
-    for (let score of this.currentUserService.currentUser.userHighScores) {
-      let added:boolean = false;
-      for (let i:number = 0; i < tempScores.length; i++) {
-        if (score.score >= tempScores[i].score) {
-          tempScores.splice(i, 0, score);
-          added = true;
-          break;
-        }
+    if (this.currentUserService.currentUser.userId == 0) {
+      let scoreTable = document.getElementById("user-loged-in");
+      let loginMessage = document.getElementById("please-login");
+
+      if (scoreTable != null) {
+        scoreTable.hidden = true;
       }
 
-      if (!added) tempScores.push(score);
+      if (loginMessage != null) {
+        loginMessage.hidden = false;
+      }
+    }
+    else {
+      let scoreTable = document.getElementById("user-loged-in");
+      let loginMessage = document.getElementById("please-login");
+
+      if (scoreTable != null) {
+        scoreTable.hidden = false;
+      }
+
+      if (loginMessage != null) {
+        loginMessage.hidden = true;
+      }
+
+      let tempScores:HighScore[] = [];
+      for (let score of this.currentUserService.currentUser.userHighScores) {
+        let added:boolean = false;
+        for (let i:number = 0; i < tempScores.length; i++) {
+          if (score.score >= tempScores[i].score) {
+            tempScores.splice(i, 0, score);
+            added = true;
+            break;
+          }
+        }
+
+        if (!added) tempScores.push(score);
+      }
+
+      this.currentUserScores = tempScores;
+      if (this.currentUserScores.length > this.highScoreLimit) this.currentUserScores.slice(0, this.highScoreLimit); //only show the first 10 scores
     }
     
-    this.currentUserScores = tempScores;
-    if (this.currentUserScores.length > this.highScoreLimit) this.currentUserScores.slice(0, this.highScoreLimit); //only show the first 10 scores
   }
 
 }

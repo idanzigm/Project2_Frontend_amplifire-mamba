@@ -32,8 +32,8 @@ https://github.com/220103JavaFS/Project2_Backend_amplifire-mamba.git
 
 ## Contributers
 
-Bobby Floyd
-Mahad Khalid
-Ivo Vladkov
-Ian Martin
+Bobby Floyd<br>
+Mahad Khalid<br>
+Ivo Vladkov<br>
+Ian Martin<br>
 Zach Byrski

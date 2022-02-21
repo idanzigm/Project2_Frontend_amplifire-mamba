@@ -42,6 +42,7 @@ export class TestComponent implements OnInit {
   currentlySelectedDifficutly:number = 0;
   potentialPointValue:number = 0;
   totalPoints:number = 0;
+  questionsAnswered:number = 0;
 
   constructor(private quest:QuestionService, private cat:CategoryService, private currentGame:CurrentGameService, private answerService:AnswerCompareService, private currentUserService:CurrentUserService,
     private router:Router) { }
@@ -181,16 +182,19 @@ export class TestComponent implements OnInit {
   }
 
   loadIndividualQuestion(category:number, question:number, clickedButton:string):void {
+    //check to see if the question has already been answered, if so then return without doing anything
+    this.currentClickedButton = clickedButton;
+    let currentButton = document.getElementById(this.currentClickedButton);
+    if (currentButton != null) {
+      if (currentButton.className != "btn btn-primary navbar-btn") return;
+    }
+
     //clicking on one of the question buttons will cause the question text to load in the prompt section
     this.currentQuestionPrompt = this.currentGame.questions[category][question].question;
     this.currentAnswer = this.currentGame.questions[category][question].answer;
 
-    this.currentClickedButton = clickedButton;
-    console.log(this.currentClickedButton);
-
     //load up the potential point value
     this.potentialPointValue = question * 100 + 100;
-    console.log(this.potentialPointValue);
 
     this.currentlySelectedCategory = this.currentGame.categories[category].title;
     this.currentlySelectedDifficutly = question;
@@ -210,6 +214,7 @@ export class TestComponent implements OnInit {
 
     let submitAnswer = document.getElementById("submit-answer");
     if (submitAnswer != null) submitAnswer.hidden = false;
+
   }
 
   submitAnswer() {
@@ -217,7 +222,7 @@ export class TestComponent implements OnInit {
     let correct:boolean = this.answerService.compareAnswers(this.currentAnswerPrompt, this.currentAnswer);
     let currentButton = document.getElementById(this.currentClickedButton);
     this.currentAnswerPrompt = ""; //reset answer text box
-
+    this.questionsAnswered++;
 
     if (correct) {
       //add to current point total
@@ -250,6 +255,12 @@ export class TestComponent implements OnInit {
 
     let submitAnswer = document.getElementById("submit-answer");
     if (submitAnswer != null) submitAnswer.hidden = true;
+
+    //check to see if every question on the board has been answered, if so, end the game
+    if (this.questionsAnswered == 30) {
+      alert("Thanks for playing, saving highscore data.")
+      this.stopCurrentGame();
+    }
   }
 
   stopCurrentGame():void {

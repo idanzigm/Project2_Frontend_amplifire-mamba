@@ -138,11 +138,12 @@ export class QmasterComponent implements OnInit {
           winner = teams[i];
           this.winners.push(winner);
         }
-        if (teams[i].score==winner.score){this.winners.push(winner);}
+        else if (teams[i].score==winner.score){this.winners.push(winner);}
       }
       
-      this.winner = winner;
-      if(this.winners.length==1){this.winnerMessage = "The winner is team"+winner.name+"with score"+winner.score+"points";}
+      // this.winner = winner;
+      // this.winnerMessage = "The winner is team \""+winner.name+"\" with score "+winner.score+" points!";
+      if(this.winners.length==1){this.winnerMessage = "The winner is team \""+this.winners[0].name+"\" with score "+this.winners[0].score+" points";}
       else{this.winnerMessage = "The result is a tie! Play another game do decide who is the stronger team!"}
       }
 
@@ -180,6 +181,7 @@ export class QmasterComponent implements OnInit {
     {
       this.questions = response.map(item => 
       {
+        // console.log("this is the response: "+response)
         return new Question( 
             item.id,
             item.question,
@@ -189,11 +191,12 @@ export class QmasterComponent implements OnInit {
             item.airdate
         );
       });
+         console.log(this.questions[0].answer);
+        console.log(this.questions[0].question);
+        this.q=this.questions[0].question;
+        this.currentAnswer=this.questions[0].answer;
     });
-    console.log(this.questions[0].answer);
-    console.log(this.questions[0].question);
-    this.q=this.questions[0].question;
-    this.currentAnswer=this.questions[0].answer;
+    
   }
 
   startNewGame():void{

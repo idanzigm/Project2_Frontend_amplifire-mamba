@@ -21,7 +21,7 @@ const routes: Routes = [{
   path:"register",
   component:RegisterComponent
 }, {
-  path:"test",
+  path:"main-game",
   component:TestComponent
 }, {
   path:"game-mode",

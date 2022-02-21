@@ -16,17 +16,15 @@
             <thead>  
               <tr>  
                 <th>Game ID</th>  
-                <th>Game Date/Time</th>  
-                <th>Questions</th>  
+                <th>Game Date/Time</th>   
                 <th>Score</th>  
               </tr>  
             </thead>  
             <tbody>  
-              <tr>  
-                <td>01</td>  
-                <td>02-14-2022 8:10pm</td>  
-                <td>20</td>  
-                <td>85%</td>  
+              <tr *ngFor="let score of currentUserScores">
+                <td>{{score.gameId}}</td>  
+                <td>{{score.gameTime}}</td> 
+                <td>{{score.score}}</td>  
               </tr>  
 
             </tbody>  

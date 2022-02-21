@@ -1,4 +1,8 @@
-<br><br><br>
+<section class="vh-100" style="background-color: #eee;">
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10 col-lg-10">
+            <div class="border"><br><br><br>
 <!-- <div *ngIf ="showButtonSelectNoTeams">
     <button (click)="setNumTeams(num.value)" class="btn btn-secondary" style="margin-right: 15px;">Enter number of teams</button>
     <input type="number" id="num" #num placeholder="Enter number of teams">
@@ -20,26 +24,29 @@
     Team 3: <input formControlName=2  placeholder="Enter Team Name"> <br><br>
     Team 4: <input formControlName=3  placeholder="Enter Team Name"> <br><br><br><br>
     Number of Questions: <input formControlName=4  placeholder="Enter Number of Questions"> <br><br>
-         <button type="submit">Submit</button>
+         <button type="submit" class="btn btn-secondary">Submit</button>
  </form> 
 
  <!-- ==================================== -->
 
- <button *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames" (click)="getRandomQuestion()">Get A Question</button>
- <div *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames"> {{q}}</div>
+ <button *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames && !declareWinner" (click)="getRandomQuestion()" class="btn btn-secondary">Get a Question</button>
+ <br><br><br>
+ <div *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames  && !declareWinner"><h1> {{q}}</h1></div><br>
+ <div *ngIf = "showAnswer"><h1>The Answer Is: {{currentAnswer}}</h1></div>
+ <br><br>
 
- <p *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames">Quizz {{currentQuiz}} of {{numQuizzes}}</p>
+ <p *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames  && !declareWinner">Quizz {{currentQuiz}} of {{numQuizzes}}</p>
 
- <form *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames" [formGroup]="answerForm" (ngSubmit)="onSubmitAnswers()">
+ <form *ngIf = "currentQuiz<=numQuizzes && !showFormTeamNames  && !declareWinner" [formGroup]="answerForm" (ngSubmit)="onSubmitAnswers()">
     
     {{teams[0].name}}: <input formControlName=1  placeholder="Enter Answer"> <br><br>
     {{teams[1].name}}: <input formControlName=2  placeholder="Enter Answer"> <br><br>
     {{teams[2].name}}: <input formControlName=3  placeholder="Enter Answer"> <br><br>
     {{teams[3].name}}: <input formControlName=4  placeholder="Enter Answer"> <br><br>
-         <button type="submit">Submit</button>
+         <button type="submit" class="btn btn-secondary">Submit</button>
  </form> 
 
- <table *ngIf = "!showFormTeamNames && currentQuiz<=numQuizzes">
+ <table style="margin-left:auto;margin-right:auto;" cellpadding="7"  *ngIf = "!showFormTeamNames && currentQuiz<=numQuizzes">
     <tr>
       <th>Team Name</th>
       <th>Score</th>
@@ -62,6 +69,14 @@
     </tr>
   </table>
 
-  <div *ngIf = "!showFormTeamNames && currentQuiz>numQuizzes">The Winner of the Quiz is team {{winner.name}} with a socre of {{winner.score}} points!
-      <button (click)="startNewGame()">Start New Qizz Game</button>
+  <div *ngIf = "declareWinner"><h1>The Winner of the Quiz is team {{winner.name}} with a socre of {{winner.score}} points!</h1>
+    <br>
+    <br>
+      <button (click)="startNewGame()" class="btn btn-secondary">Start New Qizz Game</button>
   </div>
+
+</div>
+</div>
+</div>
+</div>
+</section>

@@ -192,6 +192,7 @@ export class TestComponent implements OnInit {
     //clicking on one of the question buttons will cause the question text to load in the prompt section
     this.currentQuestionPrompt = this.currentGame.questions[category][question].question;
     this.currentAnswer = this.currentGame.questions[category][question].answer;
+    console.log(this.currentAnswer);
 
     //load up the potential point value
     this.potentialPointValue = question * 100 + 100;

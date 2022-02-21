@@ -1,12 +1,12 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
 
-  <span><a href="#" style="color:white; text-decoration: none;"><mat-icon>question_answer</mat-icon>QUIZ BOWL</a></span>
+  <span><a routerLinkActive="true" routerLink="" style="color:white; text-decoration: none;"><mat-icon>question_answer</mat-icon>QUIZ BOWL</a></span>
 
   <div class="spacer"></div>
 
-  <a mat-button routerLinkActive="true" routerLink="single-player" *ngIf= "userLoggedIn()" >Main Game</a>
+  <!--<a mat-button routerLinkActive="true" routerLink="single-player" *ngIf= "userLoggedIn()" >Main Game</a>-->
 
-  <a mat-button routerLinkActive="true" routerLink="test" *ngIf= "userLoggedIn()" >JService API Test Page</a>
+  <a mat-button routerLinkActive="true" routerLink="main-game" *ngIf= "userLoggedIn()" >Main Game Mode</a>
   <a mat-button routerLinkActive="true" routerLink="qmaster" *ngIf= "userLoggedIn()" >Quiz Master</a>
 
   <a mat-button routerLinkActive="true" routerLink="practice-mode" *ngIf= "userLoggedIn()" >Practice Mode</a>

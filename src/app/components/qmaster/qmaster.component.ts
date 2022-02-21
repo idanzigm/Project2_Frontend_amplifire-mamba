@@ -32,6 +32,12 @@ export class QmasterComponent implements OnInit {
   t3:Team = new Team('');
   t4:Team = new Team('');
   winner:Team = new Team('');
+  winners:Team[] =[];
+  showAnswer:boolean = false;
+  declareWinner:boolean = false;
+  disableBtnGetQ:boolean = false;
+  disableBtnSubmitAns:boolean = false;
+  winnerMessage:string = ''
 
 
   
@@ -96,6 +102,8 @@ export class QmasterComponent implements OnInit {
     4: new FormControl('')
   }); 
   onSubmitAnswers():void{
+    this.disableBtnSubmitAns = true;
+    this.showAnswer = true;
     let t1Ans:string = this.answerForm.get([1])?.value;
     let t2Ans:string = this.answerForm.get([2])?.value;
     let t3Ans:string = this.answerForm.get([3])?.value;
@@ -126,10 +134,16 @@ export class QmasterComponent implements OnInit {
       let teams = [this.t1, this.t2, this.t3, this.t4];
       for (let i:number = 0;i<4;i++){
         if (teams[i].score>winner.score){
+          this.winners = [];
           winner = teams[i];
+          this.winners.push(winner);
         }
+        if (teams[i].score==winner.score){this.winners.push(winner);}
       }
+      
       this.winner = winner;
+      if(this.winners.length==1){this.winnerMessage = "The winner is team"+winner.name+"with score"+winner.score+"points";}
+      else{this.winnerMessage = "The result is a tie! Play another game do decide who is the stronger team!"}
       }
 
 
@@ -140,6 +154,8 @@ export class QmasterComponent implements OnInit {
     
     this.answerForm.reset();
     console.log(this.t1Ans, this.t2Ans,this.t3Ans,this.t4Ans);
+    if(this.currentQuiz==this.numQuizzes){ this.declareWinner = true;}
+   
   }
 
   getRandomQuestion():void {
@@ -150,11 +166,15 @@ export class QmasterComponent implements OnInit {
   //   );
   //   console.log(this.questions);
   //   this.q = this.questions[0];
+  this.disableBtnSubmitAns = false;
+  this.showAnswer = false;
   this.currentQuiz++
   this.t1Ans = false;
   this.t2Ans = false;
   this.t3Ans = false;
   this.t4Ans = false;
+
+  if (this.currentQuiz==this.numQuizzes){this.disableBtnGetQ = true;}
 
   this.quest.getSingleQuestion().subscribe(response => 
     {
@@ -197,6 +217,12 @@ export class QmasterComponent implements OnInit {
     this.t3 = new Team('');
     this.t4 = new Team('');
     this.winner = new Team('');
+    this.winners = [];
+    this.showAnswer = false;
+    this.declareWinner = false;
+    this.disableBtnGetQ = false;
+    this.disableBtnSubmitAns = false;
+    this.winnerMessage = '';
   }
   
 }

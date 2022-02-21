@@ -30,7 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 https://github.com/220103JavaFS/Project2_Backend_amplifire-mamba.git
 
-## Contributers
+## Contributors
 
 Bobby Floyd<br>
 Mahad Khalid<br>

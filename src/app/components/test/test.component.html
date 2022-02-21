@@ -119,9 +119,10 @@
 <br>
 <button id="new-game" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "startNewGame()">Start New Game</button>
 <button hidden id="end-game" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "stopCurrentGame()">Stop Current Game</button>
-<p style="margin-left:10px;">CURRENT SCORE: {{totalPoints}}</p>
+<h2 style="margin-left:10px; color:green">CURRENT SCORE: {{totalPoints}}</h2>
 <br>
 <div class="container-fluid" style="text-align:center">
+    <h1 style="font-family: Stencil Std; font-weight:900; text-decoration: underline; font-size:50px;">IT'S QUIZ BOWL TIME!</h1><br><br>
     <div id="categories" class="row flex-row flex-nowrap" style="text-align:center">
         <div class="col-12">
             <button id="cat-1" class="btn btn-danger navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;">{{category1}}</button>
@@ -183,13 +184,12 @@
         </div>
     </div>
 
-    <h3 id="question-header" hidden>Selected Question:</h3>
-    <p id="question-prompt" hidden style="border:1px; border-color:black; border-style:solid; max-width: 300px; min-height: 50px; border-radius: 15px; padding: 5px; margin:auto">{{currentQuestionPrompt}}</p>
+    <h2 id="question-header" hidden>Selected Question:</h2>
+    <p id="question-prompt" hidden style="border:1px; border-color:black; border-style:solid; max-width: 700px; min-height: 50px; border-radius: 15px; padding: 5px; margin:auto">{{currentQuestionPrompt}}</p>
     
     <br>
-    <br>
     
-    <h3 id="answer-header" hidden>Answer:</h3>
+    <label for="answer-prompt" id="answer-header" hidden>Answer: </label>
     <input id="answer-prompt" type="text" [(ngModel)] = "currentAnswerPrompt" style="min-width:500px;" hidden>
     <button hidden id="submit-answer" class="btn btn-primary navbar-btn" style="margin:10px; min-width: 150px; min-height: 50px;" (click) = "submitAnswer()">Submit Answer</button>
 

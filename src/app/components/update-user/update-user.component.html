@@ -10,7 +10,7 @@
     <h1 class="h3 mb-3 fw-normal">Update Information</h1>
 
       <label for="username">Username</label>
-      <input type="text" id="username" name="username" [(ngModel)]="username">
+      <input type="text" id="username" name="username" [(ngModel)]="username" disabled>
 
       <label for="fname">First Name</label>
       <input type="text" id="fname" name="firstname" [(ngModel)]="fname">
@@ -21,10 +21,10 @@
       <label for="lname">Email</label>
       <input type="text" id="lname" name="lastname" [(ngModel)]="email">
 
-      <label for="lname">Create New Password</label>
-      <input type="text" id="lname" name="lastname" [(ngModel)]="password">
+      <label for="lname" style="margin-bottom:7px">Create New Password</label><br>
+      <input type="password" id="lname" name="lastname" [(ngModel)]="password" style="width:358px; height:40px;"><br><br>
     
-      <button (click)="userUpdated()" class="btn btn-secondary" style="margin-right: 15px;">Update</button>
+      <button (click)="userUpdated()" class="btn btn-secondary" style="margin-left: 135px; width:100px; height:50px">Update</button>
   </div>
 </div>
 </div>

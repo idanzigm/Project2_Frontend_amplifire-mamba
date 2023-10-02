@@ -37,3 +37,8 @@ Mahad Khalid<br>
 Ivo Vladkov<br>
 Ian Martin<br>
 Zach Byrski
+
+
+## My Contribution 
+
+I implemented the entirety of Single Player Componenet. 
